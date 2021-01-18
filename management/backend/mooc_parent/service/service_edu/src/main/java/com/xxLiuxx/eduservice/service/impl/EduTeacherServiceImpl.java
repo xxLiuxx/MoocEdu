@@ -38,6 +38,8 @@ public class EduTeacherServiceImpl extends ServiceImpl<EduTeacherMapper, EduTeac
 
         QueryWrapper<EduTeacher> wrapper = new QueryWrapper<>();
 
+        wrapper.orderByDesc("gmt_create");
+
         String name = teacherQuery.getName();
         Integer level = teacherQuery.getLevel();
         String begin = teacherQuery.getBegin();
