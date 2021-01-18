@@ -25,5 +25,20 @@ export default {
       method: 'post',
       data: teacher
     })
+  },
+
+  getTeacher(id) {
+    return request({
+      url: `${api_prefix}/${id}`,
+      method: 'get'
+    })
+  },
+
+  updateTeacher(id, teacher) {
+    return request({
+      url: `${api_prefix}/${id}`,
+      method: 'put',
+      data: teacher
+    })
   }
 }

@@ -5,7 +5,7 @@
         <el-input v-model="teacher.name"/>
       </el-form-item>
       <el-form-item label="sort">
-        <el-input-number v-model="teacher.sort" controls-position="right" min="0"/>
+        <el-input-number v-model="teacher.sort" controls-position="right" :min="0"/>
       </el-form-item>
       <el-form-item label="level">
         <el-select v-model="teacher.level" clearable placeholder="select">
@@ -21,7 +21,7 @@
       </el-form-item>
 
       <el-form-item>
-        <el-button :disabled="saveBtnDisabled" type="primary" @click="save()">save</el-button>
+        <el-button :disabled="saveBtnDisabled" type="primary" @click="saveOrUpdate()">save</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -39,16 +39,44 @@ export default {
   },
 
   created() {
-
+    if (this.$route.params && this.$route.params.id) {
+      const id = this.$route.params.id
+      this.loadTeacher(id)
+    }
   },
 
   methods: {
+    saveOrUpdate() {
+      if (this.teacher.id) {
+        const id = this.teacher.id
+        this.update(id)
+      } else {
+        this.save()
+      }
+    },
     save() {
       teacherApi.addTeacher(this.teacher)
         .then(response => {
           this.$message({
             type: 'success',
             message: 'add success'
+          })
+          this.$router.push({ path: '/teacher/table' })
+        })
+    },
+    loadTeacher(id) {
+      teacherApi.getTeacher(id)
+        .then(response => {
+          console.log(response)
+          this.teacher = response.data.teacher
+        })
+    },
+    update(id) {
+      teacherApi.updateTeacher(id, this.teacher)
+        .then(response => {
+          this.$message({
+            type: 'success',
+            message: 'update success'
           })
           this.$router.push({ path: '/teacher/table' })
         })
@@ -65,9 +93,11 @@ export default {
   position: relative;
   overflow: hidden;
 }
+
 .avatar-uploader .el-upload:hover {
   border-color: #409EFF;
 }
+
 .avatar-uploader-icon {
   font-size: 28px;
   color: #8c939d;
@@ -76,6 +106,7 @@ export default {
   line-height: 178px;
   text-align: center;
 }
+
 .avatar {
   width: 178px;
   height: 178px;

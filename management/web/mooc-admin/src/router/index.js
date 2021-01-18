@@ -74,7 +74,14 @@ export const constantRoutes = [
         name: 'Add Teacher',
         component: () => import('@/views/edu/teacher/add'),
         meta: { title: 'Add Teacher', icon: 'plus' }
-      }
+      },
+      {
+        path: 'edit/:id',
+        name: 'Edit Teacher',
+        component: () => import('@/views/edu/teacher/add'),
+        meta: { title: 'Edit Teacher', icon: 'plus' },
+        hidden: true
+      },
     ]
   },
 
