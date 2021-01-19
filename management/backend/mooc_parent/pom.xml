@@ -26,7 +26,7 @@
         <mybatis-plus-generator.version>3.4.0</mybatis-plus-generator.version>
         <velocity.version>2.0</velocity.version>
         <springfox.version>3.0.0</springfox.version>
-        <aliyun.sdk.oss.version>3.11.2</aliyun.sdk.oss.version>
+        <aliyun.sdk.oss.version>3.10.2</aliyun.sdk.oss.version>
         <jodatime.version>2.10.4</jodatime.version>
         <poi.version>3.17</poi.version>
         <commons-fileupload.version>1.3.1</commons-fileupload.version>
@@ -43,9 +43,13 @@
         <commons-dbutils.version>1.7</commons-dbutils.version>
         <canal.client.version>1.1.0</canal.client.version>
         <docker.image.prefix>zx</docker.image.prefix>
-        <cloud-alibaba.version>2.2.1.RELEASE</cloud-alibaba.version>
+        <cloud-alibaba.version>2.2.4.RELEASE</cloud-alibaba.version>
         <swagger.annotations.version>1.5.22</swagger.annotations.version>
         <swagger.models.version>1.5.22</swagger.models.version>
+        <jaxb-api.version>2.3.1</jaxb-api.version>
+        <activation.version>1.1.1</activation.version>
+        <jaxb-runtime.version>2.3.3</jaxb-runtime.version>
+        <spring-cloud-starter-alicloud-oss>2.2.0.RELEASE</spring-cloud-starter-alicloud-oss>
     </properties>
 
     <dependencyManagement>
@@ -107,10 +111,34 @@
             </dependency>
 
             <!--aliyunOSS-->
+<!--            <dependency>-->
+<!--                <groupId>com.aliyun.oss</groupId>-->
+<!--                <artifactId>aliyun-sdk-oss</artifactId>-->
+<!--                <version>${aliyun.oss.version}</version>-->
+<!--            </dependency>-->
+
             <dependency>
-                <groupId>com.aliyun.oss</groupId>
-                <artifactId>aliyun-sdk-oss</artifactId>
-                <version>${aliyun.oss.version}</version>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-starter-alicloud-oss</artifactId>
+                <version>${spring-cloud-starter-alicloud-oss}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.xml.bind</groupId>
+                <artifactId>jaxb-api</artifactId>
+                <version>${jaxb-api.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.activation</groupId>
+                <artifactId>activation</artifactId>
+                <version>${activation.version}</version>
+            </dependency>
+            <!-- no more than 2.3.3-->
+            <dependency>
+                <groupId>org.glassfish.jaxb</groupId>
+                <artifactId>jaxb-runtime</artifactId>
+                <version>${jaxb-runtime.version}</version>
             </dependency>
 
             <!--日期时间工具-->

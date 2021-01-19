@@ -1,0 +1,14 @@
+server:
+  port: 8002
+spring:
+  cloud:
+    alicloud:
+      access-key: LTAI4GDR68tGrgGWiuzKgF8L
+      secret-key: a4ILbgMnH6LvQHKpCUQkmBcn4SaNRo
+      oss:
+        endpoint: oss-cn-beijing.aliyuncs.com
+        bucket: mooc-edu-xxliuxx
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
