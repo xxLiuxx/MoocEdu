@@ -20,6 +20,25 @@
         <el-input v-model="teacher.intro" :rows="10" type="textarea"/>
       </el-form-item>
 
+      <!-- avatar -->
+      <el-form-item label="avatar">
+        <!-- thum image -->
+        <pan-thumb :image="teacher.avatar"/>
+        <el-button type="primary" icon="el-icon-upload" @click="imageCropperShow=true">change avatar</el-button>
+        <!--
+    @close：close component
+    @crop-upload-success：callback -->
+        <image-cropper
+          v-show="imageCropperShow"
+          :width="300"
+          :height="300"
+          :key="imageCropperKey"
+          :url="BASE_API+'/eduoss/file'"
+          field="file"
+          @close="close"
+          @crop-upload-success="cropSuccess"/>
+      </el-form-item>
+
       <el-form-item>
         <el-button :disabled="saveBtnDisabled" type="primary" @click="saveOrUpdate()">save</el-button>
       </el-form-item>
@@ -29,12 +48,20 @@
 
 <script>
 import teacherApi from '@/api/edu/teacher'
-
+import imageCropper from '@/components/ImageCropper'
+import panThumb from '@/components/PanThumb'
 export default {
+  components: {
+    imageCropper,
+    panThumb
+  },
   data() {
     return {
       teacher: {},
-      saveBtnDisabled: false
+      saveBtnDisabled: false,
+      BASE_API: process.env.VUE_APP_BASE_API,
+      imageCropperShow: false,
+      imageCropperKey: 0
     }
   },
 
@@ -80,6 +107,13 @@ export default {
           })
           this.$router.push({ path: '/teacher/table' })
         })
+    },
+    close() {
+      this.imageCropperShow = false
+    },
+    cropSuccess(data) {
+      this.imageCropperShow = false
+      this.teacher.avatar = data.url
     }
   }
 }
