@@ -22,7 +22,7 @@ public class CodeGenerator {
         // 2. global config
         GlobalConfig gc = new GlobalConfig();
         String projectPath = System.getProperty("user.dir");
-        gc.setOutputDir("/Users/liuyuchen/IdeaProjects/OnlineEdu/mooc_parent/service/service_edu/src/main/java");
+        gc.setOutputDir("/Users/liuyuchen/IdeaProjects/OnlineEdu/management/backend/mooc_parent/service/service_edu/src/main/java");
         gc.setAuthor("Yuchen Liu");
         gc.setOpen(true); //open the directories after code generation
         gc.setFileOverride(true); //overwrite the files when updating
@@ -54,7 +54,7 @@ public class CodeGenerator {
 
         // 5. strategy config
         StrategyConfig strategy = new StrategyConfig();
-        strategy.setInclude("edu_teacher");
+        strategy.setInclude("edu_course", "edu_course_description", "edu_video", "edu_chapter");
         strategy.setNaming(NamingStrategy.underline_to_camel);//name strategy when mapping the database's name to entity
         strategy.setTablePrefix(pc.getModuleName() + "_");
 

@@ -3,7 +3,7 @@ package com.xxLiuxx.eduservice.service;
 import com.xxLiuxx.commonutils.entity.PageResult;
 import com.xxLiuxx.eduservice.entity.EduTeacher;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.xxLiuxx.eduservice.entity.vo.TeacherQuery;
+import com.xxLiuxx.eduservice.entity.bo.TeacherQuery;
 
 /**
  * <p>

@@ -1,5 +1,7 @@
 package com.xxLiuxx.eduservice.entity.bo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -30,6 +32,7 @@ public class SubjectBo implements Serializable {
 
     public String title;
 
+    @JsonIgnore
     public int sort;
 
     public int getSort() {

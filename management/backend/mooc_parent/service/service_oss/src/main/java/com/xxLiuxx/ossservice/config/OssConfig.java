@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 /**
  * @author Yuchen Liu
  */
-
 @Component
 public class OssConfig implements InitializingBean {
     @Value("${spring.cloud.alicloud.access-key}")

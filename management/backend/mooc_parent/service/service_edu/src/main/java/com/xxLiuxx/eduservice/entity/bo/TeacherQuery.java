@@ -1,4 +1,4 @@
-package com.xxLiuxx.eduservice.entity.vo;
+package com.xxLiuxx.eduservice.entity.bo;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

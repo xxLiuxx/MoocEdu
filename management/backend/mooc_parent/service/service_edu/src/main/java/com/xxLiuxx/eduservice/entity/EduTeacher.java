@@ -140,16 +140,16 @@ public class EduTeacher implements Serializable {
     @Override
     public String toString() {
         return "EduTeacher{" +
-        "id=" + id +
-        ", name=" + name +
-        ", intro=" + intro +
-        ", career=" + career +
-        ", level=" + level +
-        ", avatar=" + avatar +
-        ", sort=" + sort +
-        ", isDeleted=" + isDeleted +
-        ", gmtCreate=" + gmtCreate +
-        ", gmtModified=" + gmtModified +
-        "}";
+                "id=" + id +
+                ", name=" + name +
+                ", intro=" + intro +
+                ", career=" + career +
+                ", level=" + level +
+                ", avatar=" + avatar +
+                ", sort=" + sort +
+                ", isDeleted=" + isDeleted +
+                ", gmtCreate=" + gmtCreate +
+                ", gmtModified=" + gmtModified +
+                "}";
     }
 }

@@ -4,7 +4,7 @@ package com.xxLiuxx.eduservice.controller;
 import com.xxLiuxx.commonutils.entity.CommonResult;
 import com.xxLiuxx.commonutils.entity.PageResult;
 import com.xxLiuxx.eduservice.entity.EduTeacher;
-import com.xxLiuxx.eduservice.entity.vo.TeacherQuery;
+import com.xxLiuxx.eduservice.entity.bo.TeacherQuery;
 import com.xxLiuxx.eduservice.service.EduTeacherService;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,4 +86,3 @@ public class EduTeacherController {
         return flag ? CommonResult.success() : CommonResult.error().message("fail to add teacher");
     }
 }
-
