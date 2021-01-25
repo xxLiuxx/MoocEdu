@@ -3,6 +3,12 @@ import request from '@/utils/request'
 const api_prefix = '/eduservice/teacher'
 
 export default {
+  findAll() {
+    return request({
+      url: `${api_prefix}/findAll`,
+      method: 'get'
+    })
+  },
   getTeacherList(pageNumber, limit, teacherQuery) {
     return request({
       url: `${api_prefix}/pageTeacher/${pageNumber}/${limit}`,

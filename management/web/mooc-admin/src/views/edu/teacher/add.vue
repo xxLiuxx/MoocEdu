@@ -88,7 +88,7 @@ export default {
             type: 'success',
             message: 'add success'
           })
-          this.$router.push({ path: '/teacher/table' })
+          this.$router.push({ path: '/teacher/list' })
         })
     },
     loadTeacher(id) {
@@ -105,7 +105,7 @@ export default {
             type: 'success',
             message: 'update success'
           })
-          this.$router.push({ path: '/teacher/table' })
+          this.$router.push({ path: '/teacher/list' })
         })
     },
     close() {

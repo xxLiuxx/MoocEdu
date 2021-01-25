@@ -59,12 +59,12 @@ export const constantRoutes = [
   {
     path: '/teacher',
     component: Layout,
-    redirect: '/teacher/table',
+    redirect: '/teacher/list',
     name: 'Teacher Management',
     meta: { title: 'Teacher Management', icon: 'el-icon-s-help' },
     children: [
       {
-        path: 'table',
+        path: 'list',
         name: 'Teacher List',
         component: () => import('@/views/edu/teacher/list'),
         meta: { title: 'Teacher List', icon: 'table' }
@@ -81,28 +81,70 @@ export const constantRoutes = [
         component: () => import('@/views/edu/teacher/add'),
         meta: { title: 'Edit Teacher', icon: 'plus' },
         hidden: true
-      },
+      }
     ]
   },
 
   {
-    path: '/example',
+    path: '/subject',
     component: Layout,
-    redirect: '/example/table',
-    name: 'Example',
-    meta: { title: 'Example', icon: 'el-icon-s-help' },
+    redirect: '/subject/list',
+    name: 'Subject Management',
+    meta: { title: 'Subject Management', icon: 'el-icon-s-help' },
     children: [
       {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table' }
+        path: 'list',
+        name: 'Subject List',
+        component: () => import('@/views/edu/subject/list'),
+        meta: { title: 'Subject List', icon: 'table' }
       },
       {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree' }
+        path: 'add',
+        name: 'Add Subject',
+        component: () => import('@/views/edu/subject/add'),
+        meta: { title: 'Add Subject', icon: 'plus' }
+      }
+    ]
+  },
+  {
+    path: '/course',
+    component: Layout,
+    redirect: '/course/list',
+    name: 'Course',
+    meta: { title: 'Course Management', icon: 'form' },
+    children: [
+      {
+        path: 'list',
+        name: 'Course List',
+        component: () => import('@/views/edu/course/list'),
+        meta: { title: 'Course List', icon: 'table' }
+      },
+      {
+        path: 'info',
+        name: 'Course Info',
+        component: () => import('@/views/edu/course/info'),
+        meta: { title: 'Add Course', icon: 'plus' }
+      },
+      {
+        path: 'info/:id',
+        name: 'Course Info Edit',
+        component: () => import('@/views/edu/course/info'),
+        meta: { title: 'Basic Info', noCache: true },
+        hidden: true
+      },
+      {
+        path: 'chapter/:id',
+        name: 'Course Chapter Edit',
+        component: () => import('@/views/edu/course/chapter'),
+        meta: { title: 'Chapter Info', noCache: true },
+        hidden: true
+      },
+      {
+        path: 'publish/:id',
+        name: 'Course Publish Edit',
+        component: () => import('@/views/edu/course/publish'),
+        meta: { title: 'Publish Course', noCache: true },
+        hidden: true
       }
     ]
   },
