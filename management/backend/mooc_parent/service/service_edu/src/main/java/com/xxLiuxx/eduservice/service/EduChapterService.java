@@ -2,10 +2,13 @@ package com.xxLiuxx.eduservice.service;
 
 import com.xxLiuxx.eduservice.entity.EduChapter;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.xxLiuxx.eduservice.entity.bo.ChapterBo;
+
+import java.util.List;
 
 /**
  * <p>
- * 课程 服务类
+ * chapter service
  * </p>
  *
  * @author Yuchen Liu
@@ -13,4 +16,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface EduChapterService extends IService<EduChapter> {
 
+    List<ChapterBo> getChapterVideo(String courseId);
 }

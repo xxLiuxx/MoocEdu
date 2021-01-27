@@ -19,4 +19,17 @@ public interface EduCourseService extends IService<EduCourse> {
      * @param courseFormBo
      */
     String addCourse(CourseFormBo courseFormBo);
+
+    /**
+     * query course
+     * @param courseId
+     * @return
+     */
+    CourseFormBo queryCourseById(String courseId);
+
+    /**
+     * update course
+     * @param courseFormBo
+     */
+    void updateCourseById(CourseFormBo courseFormBo);
 }
