@@ -30,8 +30,9 @@
       <el-form-item label="Total Course Time">
         <el-input-number :min="0" v-model="courseInfo.lessonNum" controls-position="right" placeholder="Enter the total course time"/>
       </el-form-item>
+
       <el-form-item label="Course Description">
-        <el-input v-model="courseInfo.description" placeholder="e.g: SpringBoot is the most popular backend framework in industry"/>
+        <tinymce :height="300" v-model="courseInfo.description"/>
       </el-form-item>
 
       <el-form-item label="Course cover">
@@ -59,7 +60,11 @@
 import courseApi from '@/api/edu/course.js'
 import teacherApi from '@/api/edu/teacher.js'
 import subjectApi from '@/api/edu/subject.js'
+import Tinymce from '@/components/Tinymce'
 export default {
+  components: {
+    Tinymce
+  },
   data() {
     return {
       saveBtnDisabled: false,
@@ -133,5 +138,7 @@ export default {
 </script>
 
 <style scoped>
-
+.tinymce-container {
+  line-height: 29px;
+}
 </style>

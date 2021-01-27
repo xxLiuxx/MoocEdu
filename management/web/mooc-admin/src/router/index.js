@@ -111,7 +111,7 @@ export const constantRoutes = [
     component: Layout,
     redirect: '/course/list',
     name: 'Course',
-    meta: { title: 'Course Management', icon: 'form' },
+    meta: { title: 'Course Management', icon: 'el-icon-s-help' },
     children: [
       {
         path: 'list',
