@@ -2,6 +2,7 @@ package com.xxLiuxx.eduservice.controller;
 
 
 import com.xxLiuxx.commonutils.entity.CommonResult;
+import com.xxLiuxx.eduservice.entity.EduChapter;
 import com.xxLiuxx.eduservice.entity.bo.ChapterBo;
 import com.xxLiuxx.eduservice.service.EduChapterService;
 import io.swagger.annotations.Api;
@@ -37,6 +38,44 @@ public class EduChapterController {
             return CommonResult.notFound().message("chapter not found");
         }
         return CommonResult.success().data("chapterList", chapterList);
+    }
+
+    @PostMapping("addChapter")
+    @ApiOperation(value = "add chapter")
+    public CommonResult addChapter(@RequestBody EduChapter chapter) {
+        boolean save = this.chapterService.save(chapter);
+        if (!save) {
+            return CommonResult.error().message("fail to add chapter");
+        }
+        return CommonResult.success().message("chapter added");
+    }
+
+    @GetMapping("{chapterId}")
+    @ApiOperation(value = "get chapter info by chapter id")
+    public CommonResult queryChapterById(@PathVariable String chapterId) {
+        EduChapter chapter = this.chapterService.getById(chapterId);
+        if (chapter == null) {
+            return CommonResult.notFound().message("chapter not found");
+        }
+        return CommonResult.success().data("chapter", chapter);
+    }
+
+    @PutMapping("updateChapter")
+    public CommonResult updateChapter(@RequestBody EduChapter chapter) {
+        boolean flag = this.chapterService.updateById(chapter);
+        if (!flag) {
+            return CommonResult.error().message("fail to update chapter");
+        }
+        return CommonResult.success().message("chapter updated");
+    }
+
+    @DeleteMapping("{chapterId}")
+    public CommonResult deleteChapter(@PathVariable String chapterId) {
+        boolean result = this.chapterService.deleteChapter(chapterId);
+        if (!result) {
+            return CommonResult.error();
+        }
+        return CommonResult.success();
     }
 }
 

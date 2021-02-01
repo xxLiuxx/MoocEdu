@@ -1,7 +1,10 @@
 package com.xxLiuxx.eduservice.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
 import java.util.Date;
+
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
@@ -30,7 +33,7 @@ public class EduVideo implements Serializable {
     @ApiModelProperty(value = "chapter id")
     private String chapterId;
 
-    @ApiModelProperty(value = "节点名称")
+    @ApiModelProperty(value = "section title")
     private String title;
 
     @ApiModelProperty(value = "video source")
@@ -45,8 +48,8 @@ public class EduVideo implements Serializable {
     @ApiModelProperty(value = "play count")
     private Long playCount;
 
-    @ApiModelProperty(value = "free, 0: not free 1: free")
-    private Integer isFree;
+    @ApiModelProperty(value = "free, false: not free  true: free")
+    private Boolean isFree;
 
     @ApiModelProperty(value = "video length")
     private Float duration;
@@ -61,9 +64,11 @@ public class EduVideo implements Serializable {
     private Long version;
 
     @ApiModelProperty(value = "create time")
+    @TableField(fill = FieldFill.INSERT)
     private Date gmtCreate;
 
     @ApiModelProperty(value = "update time")
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date gmtModified;
 
 
@@ -131,11 +136,11 @@ public class EduVideo implements Serializable {
         this.playCount = playCount;
     }
 
-    public Integer getIsFree() {
+    public Boolean getIsFree() {
         return isFree;
     }
 
-    public void setIsFree(Integer isFree) {
+    public void setIsFree(Boolean isFree) {
         this.isFree = isFree;
     }
 

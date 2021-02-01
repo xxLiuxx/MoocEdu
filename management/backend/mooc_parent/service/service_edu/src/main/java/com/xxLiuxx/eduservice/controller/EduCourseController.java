@@ -32,7 +32,7 @@ public class EduCourseController {
         return CommonResult.success().data("courseId", courseId);
     }
 
-    @GetMapping("{courseId}")
+    @GetMapping("getCourseInfo/{courseId}")
     @ApiOperation(value = "query course and description by course if")
     public CommonResult queryCourseById(@PathVariable String courseId) {
         CourseFormBo courseInfo = this.courseService.queryCourseById(courseId);

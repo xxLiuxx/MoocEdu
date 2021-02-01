@@ -56,8 +56,8 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
 
         // get description
         EduCourseDescription courseDescription = this.courseDescriptionService.getById(courseId);
-
         courseFormBo.setDescription(courseDescription.getDescription());
+
         return courseFormBo;
     }
 
@@ -75,7 +75,7 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         // update the description
         EduCourseDescription courseDescription = new EduCourseDescription();
         courseDescription.setId(courseFormBo.getId());
-        courseDescription.setDescription(courseDescription.getDescription());
+        courseDescription.setDescription(courseFormBo.getDescription());
         boolean flag2 = this.courseDescriptionService.updateById(courseDescription);
         if(!flag2) {
             throw new MyException(500, "fail to save description");

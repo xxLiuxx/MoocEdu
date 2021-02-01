@@ -41,13 +41,15 @@
           :on-success="handleCoverSuccess"
           :before-upload="beforeCoverUpload"
           :action="BASE_API+'/eduoss/file'"
-          class="avatar-uploader">
+          class="avatar-uploader"
+        >
           <img :src="courseInfo.cover">
         </el-upload>
       </el-form-item>
 
       <el-form-item label="Course Price">
-        $ <el-input-number :min="0" v-model="courseInfo.price" controls-position="right" placeholder="free course: 0"/>
+        $
+        <el-input-number :min="0" v-model="courseInfo.price" controls-position="right" placeholder="free course: 0"/>
       </el-form-item>
       <el-form-item>
         <el-button :disabled="saveBtnDisabled" type="primary" @click="saveOrUpdate">next</el-button>
@@ -61,6 +63,7 @@ import courseApi from '@/api/edu/course.js'
 import teacherApi from '@/api/edu/teacher.js'
 import subjectApi from '@/api/edu/subject.js'
 import Tinymce from '@/components/Tinymce'
+
 export default {
   components: {
     Tinymce
@@ -81,10 +84,15 @@ export default {
       teacherList: [],
       subjectList: [],
       childrenSubjectList: [],
-      BASE_API: process.env.VUE_APP_BASE_API
+      BASE_API: process.env.VUE_APP_BASE_API,
+      courseId: ''
     }
   },
   created() {
+    if (this.$route.params && this.$route.params.id) {
+      this.courseId = this.$route.params.id
+      this.getCourse()
+    }
     this.getTeacherList()
     this.getParentList()
   },
@@ -124,6 +132,40 @@ export default {
       return isJPG && isLt2M
     },
     saveOrUpdate() {
+      if (this.$route.params.id) {
+        this.update()
+      } else {
+        this.save()
+      }
+    },
+    getCourse() {
+      courseApi.getCourse(this.courseId)
+        .then(response => {
+          this.courseInfo = response.data.courseInfo
+
+          // init children list
+          subjectApi.findAll()
+            .then(response => {
+              this.subjectList = response.data.subjectTree
+              for (let i = 0; i < this.subjectList.length; i++) {
+                if (this.subjectList[i].id === this.courseInfo.subjectParentId) {
+                  this.childrenSubjectList = this.subjectList[i].children
+                }
+              }
+            })
+        })
+    },
+    update() {
+      courseApi.updateCourse(this.courseInfo)
+        .then(response => {
+          this.$message({
+            type: 'success',
+            message: 'basic info updated'
+          })
+          this.$router.push('/course/chapter/' + this.courseId)
+        })
+    },
+    save() {
       courseApi.addCourse(this.courseInfo)
         .then(response => {
           this.$message({

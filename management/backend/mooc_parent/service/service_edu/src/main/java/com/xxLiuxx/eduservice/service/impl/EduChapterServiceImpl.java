@@ -1,6 +1,7 @@
 package com.xxLiuxx.eduservice.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.xxLiuxx.commonutils.entity.CommonResult;
 import com.xxLiuxx.eduservice.entity.EduChapter;
 import com.xxLiuxx.eduservice.entity.EduVideo;
 import com.xxLiuxx.eduservice.entity.bo.ChapterBo;
@@ -9,6 +10,7 @@ import com.xxLiuxx.eduservice.mapper.EduChapterMapper;
 import com.xxLiuxx.eduservice.service.EduChapterService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.xxLiuxx.eduservice.service.EduVideoService;
+import com.xxLiuxx.servicebase.handler.MyException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +18,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -36,11 +37,13 @@ public class EduChapterServiceImpl extends ServiceImpl<EduChapterMapper, EduChap
         // find all chapters
         QueryWrapper<EduChapter> chapterQueryWrapper = new QueryWrapper<>();
         chapterQueryWrapper.eq("course_id", courseId);
+        chapterQueryWrapper.orderByAsc("sort");
         List<EduChapter> chapterList = this.list(chapterQueryWrapper);
 
         // find all videos
         QueryWrapper<EduVideo> videoQueryWrapper = new QueryWrapper<>();
         videoQueryWrapper.eq("course_id", courseId);
+        videoQueryWrapper.orderByAsc("sort");
         List<EduVideo> videoList = this.videoService.list(videoQueryWrapper);
 
         // convert chapters to chapterBo
@@ -65,5 +68,25 @@ public class EduChapterServiceImpl extends ServiceImpl<EduChapterMapper, EduChap
             chapterBo.setVideoList(videoBoList);
         }
         return chapterBoList;
+    }
+
+    /**
+     * if the chapter has videos, it can not be deleted
+     *
+     * @param chapterId
+     */
+    @Override
+    public boolean deleteChapter(String chapterId) {
+        QueryWrapper<EduVideo> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("chapter_id", chapterId);
+        int count = this.videoService.count(queryWrapper);
+
+        if (count != 0) {
+            throw new MyException(500, "The chapter can't be deleted");
+        }
+
+        int result = this.baseMapper.deleteById(chapterId);
+
+        return result > 0;
     }
 }

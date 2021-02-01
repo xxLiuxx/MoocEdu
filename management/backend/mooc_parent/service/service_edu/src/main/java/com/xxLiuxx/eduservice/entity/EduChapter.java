@@ -1,7 +1,10 @@
 package com.xxLiuxx.eduservice.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
 import java.util.Date;
+
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
@@ -21,7 +24,7 @@ public class EduChapter implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "chapter id")
-      @TableId(value = "id", type = IdType.ASSIGN_ID)
+    @TableId(value = "id", type = IdType.ASSIGN_ID)
     private String id;
 
     @ApiModelProperty(value = "course id")
@@ -34,9 +37,11 @@ public class EduChapter implements Serializable {
     private Integer sort;
 
     @ApiModelProperty(value = "create time")
+    @TableField(fill = FieldFill.INSERT)
     private Date gmtCreate;
 
     @ApiModelProperty(value = "update time")
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date gmtModified;
 
 

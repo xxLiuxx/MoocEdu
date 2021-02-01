@@ -1,21 +1,61 @@
 package com.xxLiuxx.eduservice.controller;
 
 
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import com.xxLiuxx.commonutils.entity.CommonResult;
+import com.xxLiuxx.eduservice.entity.EduVideo;
+import com.xxLiuxx.eduservice.service.EduVideoService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
- * 课程视频 前端控制器
+ * video controller
  * </p>
  *
  * @author Yuchen Liu
  * @since 2021-01-23
  */
 @RestController
-@RequestMapping("/eduservice/edu-video")
+@RequestMapping("/eduservice/video")
+@CrossOrigin
 public class EduVideoController {
+    @Autowired
+    private EduVideoService videoService;
 
+    @GetMapping("{videoId}")
+    public CommonResult getVideoById(@PathVariable String videoId) {
+        EduVideo video = this.videoService.getById(videoId);
+        if (video == null) {
+            return CommonResult.notFound().message("video not found");
+        }
+        return CommonResult.success().data("video", video);
+    }
+
+    @PostMapping("addVideo")
+    public CommonResult addVideo(@RequestBody EduVideo video) {
+        this.videoService.save(video);
+        return CommonResult.success().message("video saved");
+    }
+
+    /**
+     * todo: delete the video stored on ali cloud as well
+     */
+    @DeleteMapping("{videoId}")
+    public CommonResult deleteVideo(@PathVariable String videoId) {
+        boolean flag = this.videoService.removeById(videoId);
+        if (!flag) {
+            return CommonResult.error().message("fail to delete video");
+        }
+        return CommonResult.success().message("video deleted");
+    }
+
+    @PutMapping("updateVideo")
+    public CommonResult updateVideo(@RequestBody EduVideo video) {
+        boolean flag = this.videoService.updateById(video);
+        if (!flag) {
+            return CommonResult.error().message("fail to update video");
+        }
+        return CommonResult.success().message("video updated");
+    }
 }
 
