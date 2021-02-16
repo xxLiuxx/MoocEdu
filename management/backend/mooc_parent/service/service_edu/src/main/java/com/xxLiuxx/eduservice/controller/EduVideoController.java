@@ -42,10 +42,7 @@ public class EduVideoController {
      */
     @DeleteMapping("{videoId}")
     public CommonResult deleteVideo(@PathVariable String videoId) {
-        boolean flag = this.videoService.removeById(videoId);
-        if (!flag) {
-            return CommonResult.error().message("fail to delete video");
-        }
+        this.videoService.removeVideo(videoId);
         return CommonResult.success().message("video deleted");
     }
 

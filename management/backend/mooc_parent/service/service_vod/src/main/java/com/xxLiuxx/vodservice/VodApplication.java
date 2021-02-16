@@ -1,4 +1,4 @@
-package com.xxLiuxx.ossservice;
+package com.xxLiuxx.vodservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,11 +9,12 @@ import org.springframework.context.annotation.ComponentScan;
 /**
  * @author Yuchen Liu
  */
+
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
 @EnableDiscoveryClient
-@ComponentScan("com.xxLiuxx")
-public class OssApplication {
+@ComponentScan(basePackages = {"com.xxLiuxx"})
+public class VodApplication {
     public static void main(String[] args) {
-        SpringApplication.run(OssApplication.class);
+        SpringApplication.run(VodApplication.class);
     }
 }

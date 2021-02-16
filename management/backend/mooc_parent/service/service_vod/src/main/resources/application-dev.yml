@@ -1,0 +1,16 @@
+server:
+  port: 8003
+
+#aliyun
+spring:
+  cloud:
+    alicloud:
+      access-key: LTAI4GDR68tGrgGWiuzKgF8L
+      secret-key: a4ILbgMnH6LvQHKpCUQkmBcn4SaNRo
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+
+#nacos
+spring.cloud.nacos.discovery.server-addr: 127.0.0.1:8848

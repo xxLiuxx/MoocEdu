@@ -2,10 +2,11 @@ package com.xxLiuxx.eduservice.mapper;
 
 import com.xxLiuxx.eduservice.entity.EduCourse;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.xxLiuxx.eduservice.entity.bo.PublishBo;
 
 /**
  * <p>
- * 课程 Mapper 接口
+ * course Mapper interface
  * </p>
  *
  * @author Yuchen Liu
@@ -13,4 +14,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface EduCourseMapper extends BaseMapper<EduCourse> {
 
+    PublishBo getFinalPublishBo(String courseId);
 }

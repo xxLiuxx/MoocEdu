@@ -22,5 +22,30 @@ export default {
       method: 'put',
       data: courseForm
     })
+  },
+  getPublish(courseId) {
+    return request({
+      url: `${api_prefix}/getFinalPublish/` + courseId,
+      method: 'get'
+    })
+  },
+  publishCourse(courseId) {
+    return request({
+      url: `${api_prefix}/publishCourse/` + courseId,
+      method: 'post'
+    })
+  },
+  queryCourse(pageNumber, limit, courseQuery) {
+    return request({
+      url: `${api_prefix}/queryCourse/${pageNumber}/${limit}`,
+      method: 'post',
+      data: courseQuery
+    })
+  },
+  deleteCourse(courseId) {
+    return request({
+      url: `${api_prefix}/${courseId}`,
+      method: 'delete'
+    })
   }
 }

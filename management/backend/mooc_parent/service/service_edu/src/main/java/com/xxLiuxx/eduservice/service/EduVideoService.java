@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
  * <p>
- * 课程视频 服务类
+ * course video service
  * </p>
  *
  * @author Yuchen Liu
@@ -13,4 +13,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface EduVideoService extends IService<EduVideo> {
 
+    void deleteVideoByCourseId(String courseId);
+
+    void removeVideo(String id);
 }

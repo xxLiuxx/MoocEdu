@@ -1,5 +1,7 @@
 server:
   port: 8001
+
+#Mybatis
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
@@ -7,7 +9,12 @@ mybatis-plus:
     db-config:
       logic-delete-value: 1
       logic-not-delete-value: 0
+  mapper-locations: classpath:com/xxLiuxx/eduservice/mapper/xml/*.xml
+
+#database
 spring:
+  application:
+    name: service-edu
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/online_edu?userSSL=false&&serverTimezone=GMT%2B8
@@ -16,3 +23,13 @@ spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
+
+
+#nacos
+spring.cloud.nacos.discovery.server-addr: 127.0.0.1:8848
+
+#hystrix
+feign:
+  hystrix:
+    enabled: true
+#hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 6000

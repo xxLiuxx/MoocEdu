@@ -10,6 +10,7 @@ import java.math.BigDecimal;
  */
 public class CourseFormBo implements Serializable {
     private static final long serialVersionUID = 1L;
+
     @ApiModelProperty(value = "course id")
     private String id;
 

@@ -68,7 +68,17 @@
           </el-radio-group>
         </el-form-item>
         <el-form-item label="upload video">
-          <!-- TODO -->
+          <el-upload :on-success="handleVodUploadSuccess" :on-remove="handleVodRemove" :before-remove="beforeVodRemove" :on-exceed="handleUploadExceed" :file-list="fileList" :action="BASE_API+'/eduvod/video/uploadVideo'" :limit="1" class="upload-demo">
+            <el-button size="small" type="primary">Upload Video</el-button>
+            <el-tooltip placement="right-end">
+              <div slot="content">Max size 1G，<br>
+                Format: 3GP、ASF、AVI、DAT、DV、FLV、F4V、<br>
+                GIF、M2T、M4V、MJ2、MJPEG、MKV、MOV、MP4、<br>
+                MPE、MPG、MPEG、MTS、OGG、QT、RM、RMVB、<br>
+                SWF、TS、VOB、WMV、WEBM</div>
+              <i class="el-icon-question"/>
+            </el-tooltip>
+          </el-upload>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -92,23 +102,24 @@ export default {
       chapterVideoList: [],
       chapter: {
         title: '',
-        sort: 0,
-        courseId: ''
+        sort: 0
       },
       video: {
         isFree: false,
         title: '',
         sort: 0,
-        videoSourceId: ''
+        videoSourceId: '',
+        videoOriginalName: ''
       },
       dialogChapterFormVisible: false,
-      dialogVideoFormVisible: false
+      dialogVideoFormVisible: false,
+      fileList: [],
+      BASE_API: process.env.VUE_APP_BASE_API
     }
   },
   created() {
     if (this.$route.params.id) {
       this.courseId = this.$route.params.id
-      this.chapter.courseId = this.courseId
     }
     this.getChapterVideo()
   },
@@ -142,6 +153,7 @@ export default {
         })
     },
     save() {
+      this.chapter.courseId = this.courseId
       chapterApi.addChapter(this.chapter)
         .then(response => {
           // close the window
@@ -152,6 +164,7 @@ export default {
             message: 'chapter added'
           })
           // refresh
+          this.chapter.title = ''
           this.getChapterVideo()
         })
     },
@@ -240,6 +253,7 @@ export default {
               type: 'success',
               message: 'video deleted'
             })
+            this.fileList = []
             this.getChapterVideo()
           })
       })
@@ -250,6 +264,31 @@ export default {
       this.video.title = ''
       this.video.sort = 0
       this.video.videoSourceId = ''
+      this.fileList = []
+    },
+
+    handleVodUploadSuccess(response, file, fileList) {
+      this.video.videoSourceId = response.data.videoId
+      this.video.videoOriginalName = file.name
+    },
+    handleVodRemove() {
+      videoApi.deleteAliyunVod(this.video.videoSourceId)
+        .then(response => {
+          this.$message({
+            type: 'success',
+            message: 'video deleted'
+          })
+          this.fileList = []
+          // delete the videoId and videoName in the database
+          this.video.videoSourceId = ''
+          this.video.videoOriginalName = ''
+        })
+    },
+    beforeVodRemove(file, fileList) {
+      return this.$confirm(`Are you sure to delete ${file.name} ?`)
+    },
+    handleUploadExceed() {
+      this.$message.warning('If you want to upload the video again, please delete the original one.')
     },
     previous() {
       this.$router.push('/course/info/' + this.courseId)

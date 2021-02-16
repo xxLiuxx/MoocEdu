@@ -28,5 +28,11 @@ export default {
       url: `${api_prefix}/` + videoId,
       method: 'delete'
     })
+  },
+  deleteAliyunVod(videoId) {
+    return request({
+      url: 'eduvod/video/deleteVideo/' + videoId,
+      method: 'delete'
+    })
   }
 }

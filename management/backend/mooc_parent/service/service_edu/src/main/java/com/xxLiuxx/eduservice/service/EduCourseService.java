@@ -1,8 +1,11 @@
 package com.xxLiuxx.eduservice.service;
 
+import com.xxLiuxx.commonutils.entity.PageResult;
 import com.xxLiuxx.eduservice.entity.EduCourse;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.xxLiuxx.eduservice.entity.bo.CourseFormBo;
+import com.xxLiuxx.eduservice.entity.bo.CourseQuery;
+import com.xxLiuxx.eduservice.entity.bo.PublishBo;
 
 /**
  * <p>
@@ -32,4 +35,26 @@ public interface EduCourseService extends IService<EduCourse> {
      * @param courseFormBo
      */
     void updateCourseById(CourseFormBo courseFormBo);
+
+    /**
+     * get publish object by course id
+     * @param courseId
+     * @return
+     */
+    PublishBo getFinalPublishBo(String courseId);
+
+    /**
+     * query course with pagination
+     * @param pageNumber
+     * @param limit
+     * @param courseQuery
+     * @return
+     */
+    PageResult<EduCourse> queryCourse(Long pageNumber, Long limit, CourseQuery courseQuery);
+
+    /**
+     * delete course
+     * @param courseId
+     */
+    void deleteCourse(String courseId);
 }
