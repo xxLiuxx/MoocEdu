@@ -37,9 +37,7 @@ public class EduVideoController {
         return CommonResult.success().message("video saved");
     }
 
-    /**
-     * todo: delete the video stored on ali cloud as well
-     */
+
     @DeleteMapping("{videoId}")
     public CommonResult deleteVideo(@PathVariable String videoId) {
         this.videoService.removeVideo(videoId);

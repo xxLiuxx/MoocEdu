@@ -22,6 +22,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * <p>
  * course service implement
@@ -162,6 +164,16 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         if(!flag) {
             throw new MyException(500, "fail to delete course");
         }
+    }
+
+    @Override
+    public List<EduCourse> queryCourseWithLimit() {
+        QueryWrapper<EduCourse> wrapper = new QueryWrapper<>();
+        wrapper.orderByDesc("gmt_create");
+        wrapper.last("limit 8");
+        List<EduCourse> courseList = this.list(wrapper);
+
+        return courseList;
     }
 
 

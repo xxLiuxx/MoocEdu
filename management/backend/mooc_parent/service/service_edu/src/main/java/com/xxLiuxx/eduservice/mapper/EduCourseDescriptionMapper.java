@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
  * <p>
- * 课程简介 Mapper 接口
+ * course description mapper
  * </p>
  *
  * @author Yuchen Liu

@@ -1,0 +1,19 @@
+server:
+  port: 8004
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/online_edu?userSSL=false&&serverTimezone=GMT%2B8
+    username: root
+    password: supreme150211
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+mybatis-plus:
+  mapper-locations: classpath:com/xxLiuxx/cmsservice/mapper/xml/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+#nacos
+spring.cloud.nacos.discovery.server-addr: 127.0.0.1:8848

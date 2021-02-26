@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
  * <p>
- * 讲师 Mapper 接口
+ * teacher mapper
  * </p>
  *
  * @author Yuchen Liu

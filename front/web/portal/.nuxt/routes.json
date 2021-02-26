@@ -1,0 +1,37 @@
+[
+  {
+    "name": "course",
+    "path": "/course",
+    "component": "/Users/liuyuchen/IdeaProjects/OnlineEdu/front/web/portal/pages/course/index.vue",
+    "chunkName": "pages/course/index",
+    "_name": "_2588a386"
+  },
+  {
+    "name": "teacher",
+    "path": "/teacher",
+    "component": "/Users/liuyuchen/IdeaProjects/OnlineEdu/front/web/portal/pages/teacher/index.vue",
+    "chunkName": "pages/teacher/index",
+    "_name": "_0da9006d"
+  },
+  {
+    "name": "course-id",
+    "path": "/course/:id",
+    "component": "/Users/liuyuchen/IdeaProjects/OnlineEdu/front/web/portal/pages/course/_id.vue",
+    "chunkName": "pages/course/_id",
+    "_name": "_d8546124"
+  },
+  {
+    "name": "teacher-id",
+    "path": "/teacher/:id",
+    "component": "/Users/liuyuchen/IdeaProjects/OnlineEdu/front/web/portal/pages/teacher/_id.vue",
+    "chunkName": "pages/teacher/_id",
+    "_name": "_43338bd6"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "/Users/liuyuchen/IdeaProjects/OnlineEdu/front/web/portal/pages/index.vue",
+    "chunkName": "pages/index",
+    "_name": "_480e525a"
+  }
+]

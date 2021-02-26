@@ -7,6 +7,8 @@ import com.xxLiuxx.eduservice.entity.bo.CourseFormBo;
 import com.xxLiuxx.eduservice.entity.bo.CourseQuery;
 import com.xxLiuxx.eduservice.entity.bo.PublishBo;
 
+import java.util.List;
+
 /**
  * <p>
  * course service
@@ -57,4 +59,10 @@ public interface EduCourseService extends IService<EduCourse> {
      * @param courseId
      */
     void deleteCourse(String courseId);
+
+    /**
+     * query course with limit
+     * @return
+     */
+    List<EduCourse> queryCourseWithLimit();
 }

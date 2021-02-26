@@ -16,7 +16,6 @@ import java.util.List;
  */
 
 @FeignClient(name = "service-vod", fallback = VodClientFallback.class)
-@RequestMapping("/eduvod/video")
 @Component
 public interface VodClient {
 
@@ -25,7 +24,7 @@ public interface VodClient {
      * @param videoId
      * @return
      */
-    @DeleteMapping("deleteVideo/{videoId}")
+    @DeleteMapping("/eduvod/video/deleteVideo/{videoId}")
     CommonResult deleteVideo(@PathVariable("videoId") String videoId);
 
     /**
@@ -33,6 +32,6 @@ public interface VodClient {
      * @param videoIdList
      * @return
      */
-    @DeleteMapping("deleteBatch")
+    @DeleteMapping("/eduvod/video/deleteBatch")
     CommonResult deleteBatch(@RequestParam List<String> videoIdList);
 }

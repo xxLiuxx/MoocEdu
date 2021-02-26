@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 /**
  * <p>
- * 课程科目 Mapper 接口
+ * subject mapper
  * </p>
  *
  * @author Yuchen Liu

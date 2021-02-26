@@ -5,6 +5,8 @@ import com.xxLiuxx.eduservice.entity.EduTeacher;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.xxLiuxx.eduservice.entity.bo.TeacherQuery;
 
+import java.util.List;
+
 /**
  * <p>
  * Teacher Service
@@ -23,4 +25,9 @@ public interface EduTeacherService extends IService<EduTeacher> {
      */
     PageResult<EduTeacher> queryTeacherByPage(Long pageNumber, Long limit, TeacherQuery teacherQuery);
 
+    /**
+     * query teacher with limit
+     * @return
+     */
+    List<EduTeacher> queryTeacherWithLimit();
 }

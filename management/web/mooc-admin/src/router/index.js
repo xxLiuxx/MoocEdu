@@ -148,7 +148,27 @@ export const constantRoutes = [
       }
     ]
   },
-
+  {
+    path: '/banner',
+    component: Layout,
+    redirect: '/banner/list',
+    name: 'Banner Management',
+    meta: { title: 'Banner Management', icon: 'el-icon-s-help' },
+    children: [
+      {
+        path: 'list',
+        name: 'Banner List',
+        component: () => import('@/views/cms/banner/list'),
+        meta: { title: 'Banner List', icon: 'table' }
+      },
+      {
+        path: 'add',
+        name: 'Add Banner',
+        component: () => import('@/views/cms/banner/add'),
+        meta: { title: 'Add Banner', icon: 'plus' }
+      }
+    ]
+  },
   {
     path: '/form',
     component: Layout,

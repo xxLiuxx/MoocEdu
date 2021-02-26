@@ -11,6 +11,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
  * Teacher ServiceImpl
@@ -64,6 +66,16 @@ public class EduTeacherServiceImpl extends ServiceImpl<EduTeacherMapper, EduTeac
         this.page(teacherPage, wrapper);
 
         return new PageResult<>(teacherPage.getCurrent(), teacherPage.getTotal(), teacherPage.getRecords());
+    }
+
+    @Override
+    public List<EduTeacher> queryTeacherWithLimit() {
+        QueryWrapper<EduTeacher> wrapper = new QueryWrapper<>();
+        wrapper.orderByDesc("gmt_create");
+        wrapper.last("limit 4");
+        List<EduTeacher> teacherList = this.list(wrapper);
+
+        return teacherList;
     }
 
 }
