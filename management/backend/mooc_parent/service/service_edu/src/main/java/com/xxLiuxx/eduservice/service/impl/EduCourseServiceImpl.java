@@ -19,6 +19,7 @@ import com.xxLiuxx.servicebase.handler.MyException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -166,6 +167,7 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         }
     }
 
+    @Cacheable(value = "course", key = "'selectCourseList'")
     @Override
     public List<EduCourse> queryCourseWithLimit() {
         QueryWrapper<EduCourse> wrapper = new QueryWrapper<>();

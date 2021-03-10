@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: serive-ucenter
+  profiles:
+    active: dev

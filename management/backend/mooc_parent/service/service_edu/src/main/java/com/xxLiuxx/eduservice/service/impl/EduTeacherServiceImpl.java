@@ -9,6 +9,7 @@ import com.xxLiuxx.eduservice.mapper.EduTeacherMapper;
 import com.xxLiuxx.eduservice.service.EduTeacherService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -68,6 +69,7 @@ public class EduTeacherServiceImpl extends ServiceImpl<EduTeacherMapper, EduTeac
         return new PageResult<>(teacherPage.getCurrent(), teacherPage.getTotal(), teacherPage.getRecords());
     }
 
+    @Cacheable(value = "teacher", key = "'selectTeacherList'")
     @Override
     public List<EduTeacher> queryTeacherWithLimit() {
         QueryWrapper<EduTeacher> wrapper = new QueryWrapper<>();

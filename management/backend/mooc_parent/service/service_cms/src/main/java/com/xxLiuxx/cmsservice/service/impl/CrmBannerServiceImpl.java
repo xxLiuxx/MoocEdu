@@ -8,6 +8,7 @@ import com.xxLiuxx.cmsservice.mapper.CrmBannerMapper;
 import com.xxLiuxx.cmsservice.service.CrmBannerService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.xxLiuxx.commonutils.entity.PageResult;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,6 +35,7 @@ public class CrmBannerServiceImpl extends ServiceImpl<CrmBannerMapper, CrmBanner
         return new PageResult<>(bannerPage.getCurrent(), bannerPage.getTotal(), bannerPage.getRecords());
     }
 
+    @Cacheable(key = "'selectBannerList'", value = "banner")
     @Override
     public List<CrmBanner> queryAllBanner() {
         // desc order by create time

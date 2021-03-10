@@ -25,11 +25,17 @@ public class FrontController {
     @Autowired
     private EduTeacherService teacherService;
 
-    @GetMapping
+    @GetMapping("queryTeacherAndCourse")
     public CommonResult getTeacherAndCourseWithLimit() {
         List<EduTeacher> teacherList = this.teacherService.queryTeacherWithLimit();
         List<EduCourse> courseList = this.courseService.queryCourseWithLimit();
 
         return CommonResult.success().data("teacherList", teacherList).data("courseList", courseList);
+    }
+
+    @GetMapping("queryTeacher/{id}")
+    public CommonResult queryTeacherById(@PathVariable String id) {
+        EduTeacher teacher = this.teacherService.getById(id);
+        return CommonResult.success().data("teacher", teacher);
     }
 }

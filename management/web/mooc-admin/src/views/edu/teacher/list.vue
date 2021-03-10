@@ -133,8 +133,8 @@ export default {
               type: 'success',
               message: 'record is deleted!'
             })
+            this.getList()
           })
-        this.getList()
       })
     },
     resetData() {
