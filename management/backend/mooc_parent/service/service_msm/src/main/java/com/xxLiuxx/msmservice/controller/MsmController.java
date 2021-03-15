@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -34,16 +32,16 @@ public class MsmController {
         }
         // if redis doesn't have the code, generate one
         code = NumberUtils.generateCode(6);
-        Map<String, Object> param = new HashMap<>();
-        param.put("code", code);
+//        Map<String, Object> param = new HashMap<>();
+//        param.put("code", code);
 
-        boolean isSend = this.msmService.sendVerifyCode(param, phone);
-        if(!isSend) {
-            return CommonResult.error().message("fail to send code");
-        }
+//        boolean isSend = this.msmService.sendVerifyCode(param, phone);
+//        if(!isSend) {
+//            return CommonResult.error().message("fail to send code");
+//        }
 
 
-        redisTemplate.opsForValue().set("phone", code, 5, TimeUnit.MINUTES);
+        redisTemplate.opsForValue().set(phone, code, 5, TimeUnit.MINUTES);
         return CommonResult.success();
     }
 }

@@ -5,10 +5,13 @@ import com.xxLiuxx.commonutils.utils.JwtUtils;
 import com.xxLiuxx.commonutils.utils.MD5;
 import com.xxLiuxx.servicebase.handler.MyException;
 import com.xxLiuxx.ucenterservice.entity.UcenterMember;
+import com.xxLiuxx.ucenterservice.entity.vo.RegisterVo;
 import com.xxLiuxx.ucenterservice.mapper.UcenterMemberMapper;
 import com.xxLiuxx.ucenterservice.service.UcenterMemberService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 /**
@@ -22,13 +25,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class UcenterMemberServiceImpl extends ServiceImpl<UcenterMemberMapper, UcenterMember> implements UcenterMemberService {
 
+    @Autowired
+    private StringRedisTemplate redisTemplate;
+
     @Override
     public String login(UcenterMember member) {
         // get password and mobile
         String mobile = member.getMobile();
         String password = member.getPassword();
 
-        if(StringUtils.isEmpty(mobile) || StringUtils.isEmpty(password)) {
+        if (StringUtils.isEmpty(mobile) || StringUtils.isEmpty(password)) {
             throw new MyException(500, "login failed");
         }
 
@@ -38,18 +44,51 @@ public class UcenterMemberServiceImpl extends ServiceImpl<UcenterMemberMapper, U
         wrapper.eq("password", MD5.encrypt(password));
         UcenterMember mobileMember = this.baseMapper.selectOne(wrapper);
 
-        if(mobileMember == null) {
+        if (mobileMember == null) {
             throw new MyException(404, "member not found");
         }
 
         // check if disabled
-        if(mobileMember.getIsDisabled()) {
+        if (mobileMember.getIsDisabled()) {
             throw new MyException(500, "member is disabled");
         }
 
         // generate token
-        String token = JwtUtils.getJwtToken(mobileMember.getId(), mobileMember.getNickname());
+        return JwtUtils.getJwtToken(mobileMember.getId(), mobileMember.getNickname());
+    }
 
-        return token;
+    @Override
+    public void register(RegisterVo registerVo) {
+        String nickname = registerVo.getNickname();
+        String mobile = registerVo.getMobile();
+        String password = registerVo.getPassword();
+        String code = registerVo.getCode();
+
+        if (StringUtils.isAnyEmpty(nickname, mobile, password, code)) {
+            throw new MyException(500, "fail to register");
+        }
+
+        // verify code
+        if (!StringUtils.equals(code, this.redisTemplate.opsForValue().get(mobile))) {
+            throw new MyException(500, "wrong verify code");
+        }
+
+        // check duplicate
+        QueryWrapper<UcenterMember> wrapper = new QueryWrapper<>();
+        wrapper.eq("mobile", mobile);
+        Integer count = this.baseMapper.selectCount(wrapper);
+        if (count != 0) {
+            throw new MyException(500, "mobile exists");
+        }
+
+        // add to database
+        UcenterMember ucenterMember = new UcenterMember();
+        ucenterMember.setMobile(mobile);
+        ucenterMember.setPassword(MD5.encrypt(password));
+        ucenterMember.setNickname(nickname);
+        ucenterMember.setIsDisabled(false);
+        ucenterMember.setAvatar("");
+
+        this.baseMapper.insert(ucenterMember);
     }
 }
