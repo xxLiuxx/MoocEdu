@@ -19,6 +19,28 @@ public class PageResult<T> {
     @ApiModelProperty(value = "item list for current search")
     public List<T> items;
 
+    @ApiModelProperty(value = "if has next page")
+    public boolean hasNext;
+
+    @ApiModelProperty(value = "if has previous page")
+    public boolean hasPrevious;
+
+    @ApiModelProperty(value = "current page size")
+    public long currentSize;
+
+    @ApiModelProperty(value = "total page size")
+    public long totalPages;
+
+    public PageResult(Long currentPage, Long totalRows, List<T> items, boolean hasNext, boolean hasPrevious, long currentSize, long totalPages) {
+        this.currentPage = currentPage;
+        this.totalRows = totalRows;
+        this.items = items;
+        this.hasNext = hasNext;
+        this.hasPrevious = hasPrevious;
+        this.currentSize = currentSize;
+        this.totalPages = totalPages;
+    }
+
     public PageResult(Long currentPage, Long totalRows, List<T> items) {
         this.currentPage = currentPage;
         this.totalRows = totalRows;
@@ -53,4 +75,37 @@ public class PageResult<T> {
     public void setItems(List<T> items) {
         this.items = items;
     }
+
+    public boolean isHasNext() {
+        return hasNext;
+    }
+
+    public void setHasNext(boolean hasNext) {
+        this.hasNext = hasNext;
+    }
+
+    public boolean isHasPrevious() {
+        return hasPrevious;
+    }
+
+    public void setHasPrevious(boolean hasPrevious) {
+        this.hasPrevious = hasPrevious;
+    }
+
+    public long getCurrentSize() {
+        return currentSize;
+    }
+
+    public void setCurrentSize(long currentSize) {
+        this.currentSize = currentSize;
+    }
+
+    public long getTotalPages() {
+        return totalPages;
+    }
+
+    public void setTotalPages(long totalPages) {
+        this.totalPages = totalPages;
+    }
+
 }

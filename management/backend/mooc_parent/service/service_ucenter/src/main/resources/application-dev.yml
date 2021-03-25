@@ -1,5 +1,5 @@
 server:
-  port: 8006
+  port: 8150
 
 #Mybatis
 mybatis-plus:
@@ -32,6 +32,12 @@ spring:
         max-wait: 1
         max-idle: 5
         min-idle: 0
+
+wx:
+  open:
+    appId: wxed9954c01bb89b47
+    appSecret: a7482517235173ddb4083788de60b90e
+    redirectUrl: http://guli.shop/api/ucenter/wx/callback
 
 #nacos
 spring.cloud.nacos.discovery.server-addr: 127.0.0.1:8848

@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.xxLiuxx.eduservice.entity.bo.CourseFormBo;
 import com.xxLiuxx.eduservice.entity.bo.CourseQuery;
 import com.xxLiuxx.eduservice.entity.bo.PublishBo;
+import com.xxLiuxx.eduservice.entity.frontVo.CourseFrontVo;
 
 import java.util.List;
 
@@ -65,4 +66,20 @@ public interface EduCourseService extends IService<EduCourse> {
      * @return
      */
     List<EduCourse> queryCourseWithLimit();
+
+    /**
+     * query courses by teacher id
+     * @param id
+     * @return
+     */
+    List<EduCourse> getCoursesByTeacherId(String id);
+
+    /**
+     * query front course with pagination and filter
+     * @param courseQuery
+     * @param page
+     * @param limit
+     * @return
+     */
+    PageResult<EduCourse> getFrontCourseList(CourseFrontVo courseQuery, long page, long limit);
 }

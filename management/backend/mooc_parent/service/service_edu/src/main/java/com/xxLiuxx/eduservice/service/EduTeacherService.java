@@ -30,4 +30,12 @@ public interface EduTeacherService extends IService<EduTeacher> {
      * @return
      */
     List<EduTeacher> queryTeacherWithLimit();
+
+    /**
+     * get front teacher list with pagination
+     * @param page
+     * @param limit
+     * @return
+     */
+    PageResult<EduTeacher> getFrontTeacherList(Long page, Long limit);
 }

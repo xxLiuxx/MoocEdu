@@ -80,4 +80,24 @@ public class EduTeacherServiceImpl extends ServiceImpl<EduTeacherMapper, EduTeac
         return teacherList;
     }
 
+    @Override
+    public PageResult<EduTeacher> getFrontTeacherList(Long page, Long limit) {
+        QueryWrapper<EduTeacher> wrapper = new QueryWrapper<>();
+        wrapper.orderByDesc("sort");
+
+        Page<EduTeacher> eduTeacherPage = new Page<>(page, limit);
+
+        this.baseMapper.selectPage(eduTeacherPage, wrapper);
+
+        List<EduTeacher> records = eduTeacherPage.getRecords();
+        long current = eduTeacherPage.getCurrent();
+        long pages = eduTeacherPage.getPages();
+        long size = eduTeacherPage.getSize();
+        long total = eduTeacherPage.getTotal();
+        boolean hasNext = eduTeacherPage.hasNext();
+        boolean hasPrevious = eduTeacherPage.hasPrevious();
+
+        return new PageResult<>(current, total, records, hasNext, hasPrevious, size, pages);
+    }
+
 }

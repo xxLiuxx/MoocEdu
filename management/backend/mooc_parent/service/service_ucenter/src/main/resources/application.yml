@@ -1,5 +1,5 @@
 spring:
   application:
-    name: serive-ucenter
+    name: service-ucenter
   profiles:
     active: dev

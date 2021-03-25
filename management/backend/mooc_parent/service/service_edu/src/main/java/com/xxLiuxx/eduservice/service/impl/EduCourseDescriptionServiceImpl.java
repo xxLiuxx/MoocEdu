@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * <p>
- * 课程简介 服务实现类
+ * course description serviceImpl
  * </p>
  *
  * @author Yuchen Liu

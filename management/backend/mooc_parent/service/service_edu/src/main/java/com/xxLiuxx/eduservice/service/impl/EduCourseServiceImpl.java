@@ -6,9 +6,11 @@ import com.xxLiuxx.commonutils.entity.PageResult;
 import com.xxLiuxx.eduservice.client.VodClient;
 import com.xxLiuxx.eduservice.entity.EduCourse;
 import com.xxLiuxx.eduservice.entity.EduCourseDescription;
+import com.xxLiuxx.eduservice.entity.EduTeacher;
 import com.xxLiuxx.eduservice.entity.bo.CourseFormBo;
 import com.xxLiuxx.eduservice.entity.bo.CourseQuery;
 import com.xxLiuxx.eduservice.entity.bo.PublishBo;
+import com.xxLiuxx.eduservice.entity.frontVo.CourseFrontVo;
 import com.xxLiuxx.eduservice.mapper.EduCourseMapper;
 import com.xxLiuxx.eduservice.service.EduChapterService;
 import com.xxLiuxx.eduservice.service.EduCourseDescriptionService;
@@ -176,6 +178,58 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         List<EduCourse> courseList = this.list(wrapper);
 
         return courseList;
+    }
+
+    @Override
+    public List<EduCourse> getCoursesByTeacherId(String id) {
+        QueryWrapper<EduCourse> wrapper = new QueryWrapper<>();
+        wrapper.eq("teacher_id", id);
+        List<EduCourse> courseList = this.baseMapper.selectList(wrapper);
+        return courseList;
+    }
+
+    @Override
+    public PageResult<EduCourse> getFrontCourseList(CourseFrontVo courseQuery, long page, long limit) {
+        Page<EduCourse> coursePage = new Page<>(page, limit);
+
+        if(courseQuery == null) {
+            this.page(coursePage, null);
+            return new PageResult<>(coursePage.getCurrent(), coursePage.getTotal(), coursePage.getRecords(), coursePage.hasNext(), coursePage.hasPrevious(), coursePage.getSize(), coursePage.getPages());
+        }
+
+        QueryWrapper<EduCourse> wrapper = new QueryWrapper<>();
+
+        if (!StringUtils.isEmpty(courseQuery.getSubjectParentId())) {
+            wrapper.eq("subject_parent_id", courseQuery.getSubjectParentId());
+        }
+
+        if (!StringUtils.isEmpty(courseQuery.getSubjectId())) {
+            wrapper.eq("subject_id", courseQuery.getSubjectId());
+        }
+
+        if (!StringUtils.isEmpty(courseQuery.getBuyCountSort())) {
+            wrapper.orderByDesc("buy_count");
+        }
+
+        if (!StringUtils.isEmpty(courseQuery.getGmtCreateSort())) {
+            wrapper.orderByDesc("gmt_create");
+        }
+
+        if (!StringUtils.isEmpty(courseQuery.getPriceSort())) {
+            wrapper.orderByDesc("price");
+        }
+
+        this.baseMapper.selectPage(coursePage, wrapper);
+
+        List<EduCourse> records = coursePage.getRecords();
+        long current = coursePage.getCurrent();
+        long pages = coursePage.getPages();
+        long size = coursePage.getSize();
+        long total = coursePage.getTotal();
+        boolean hasNext = coursePage.hasNext();
+        boolean hasPrevious = coursePage.hasPrevious();
+
+        return new PageResult<>(current, total, records, hasNext, hasPrevious, size, pages);
     }
 
 

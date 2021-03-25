@@ -26,4 +26,11 @@ public interface UcenterMemberService extends IService<UcenterMember> {
      * @param registerVo
      */
     void register(RegisterVo registerVo);
+
+    /**
+     * get user by wechat openid
+     * @param openid
+     * @return
+     */
+    UcenterMember getByOpenId(String openid);
 }
