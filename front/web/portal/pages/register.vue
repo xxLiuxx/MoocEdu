@@ -52,7 +52,7 @@
       <div class="more-sign">
         <h6>Social Media Account</h6>
         <ul>
-          <li><a id="weixin" class="weixin" target="_blank" href="http://huaan.free.idcfengye.com/api/ucenter/wx/login"><i
+          <li><a id="weixin" class="weixin" target="_blank" :href="baseURL+'/api/ucenter/wx/login'"><i
               class="iconfont icon-weixin"/></a></li>
           <li><a id="qq" class="qq" target="_blank" href="#"><i class="iconfont icon-qq"/></a></li>
         </ul>
@@ -77,7 +77,8 @@ export default {
       },
       sending: true,      // if send code
       second: 60,        // count down
-      codeTest: 'Get Verify Code'
+      codeTest: 'Get Verify Code',
+      baseURL: 'http://localhost:9001'
     }
   },
   methods: {

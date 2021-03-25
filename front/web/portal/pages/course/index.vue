@@ -15,26 +15,8 @@
             </dt>
             <dd class="c-s-dl-li">
               <ul class="clearfix">
-                <li>
-                  <a title="all" href="#">All</a>
-                </li>
-                <li>
-                  <a title="database" href="#">Database</a>
-                </li>
-                <li class="current">
-                  <a title="backend" href="#">Backend</a>
-                </li>
-                <li>
-                  <a title="frontend" href="#">Frontend</a>
-                </li>
-                <li>
-                  <a title="mobile" href="#">Mobile</a>
-                </li>
-                <li>
-                  <a title="web" href="#">Web</a>
-                </li>
-                <li>
-                  <a title="devops" href="#">DevOps</a>
+                <li v-for="(subjectOne, subjectOneIndex) in subjectOneList" :key="subjectOneIndex" :class="{active: oneIndex === subjectOneIndex}">
+                  <a :title="subjectOne.title" href="#" @click="getSubjectTwoList(subjectOne.id, subjectOneIndex)">{{ subjectOne.title }}</a>
                 </li>
               </ul>
             </dd>
@@ -45,14 +27,8 @@
             </dt>
             <dd class="c-s-dl-li">
               <ul class="clearfix">
-                <li>
-                  <a title="java" href="#">Java</a>
-                </li>
-                <li>
-                  <a title="spring" href="#">Spring</a>
-                </li>
-                <li>
-                  <a title="mysql" href="#">MySql</a>
+                <li v-for="(subjectTwo, subjectTwoIndex) in subjectTwoList" :key="subjectTwoIndex" :class="{active: twoIndex === subjectTwoIndex}">
+                  <a :title="subjectTwo.title" href="#" @click="searchTwo(subjectTwo.id, subjectTwoIndex)">{{ subjectTwo.title }}</a>
                 </li>
               </ul>
             </dd>
@@ -68,15 +44,17 @@
           </section>
           <section class="fl">
             <ol class="js-tap clearfix">
-              <li>
-                <a title="popularity" href="#">Popularity</a>
+              <li :class="{'current bg-orange':buyCountSort!=''}">
+                <a title="popularity" href="#" @click="searchBuyCount()">Popularity</a>
+                <span :class="{hide: buyCountSort === ''}">↓</span>
               </li>
-              <li>
-                <a title="time" href="#">Time</a>
+              <li :class="{'current bg-orange':gmtCreateSort!=''}">
+                <a title="time" href="#" @click="searchGmtCreate()">Time</a>
+                <span :class="{hide: gmtCreateSort === ''}">↓</span>
               </li>
-              <li class="current bg-orange">
-                <a title="price" href="#">Price&nbsp;
-                  <span>↓</span>
+              <li :class="{'current bg-orange':priceSort!=''}">
+                <a title="price" href="#" @click="searchPrice()">Price&nbsp;
+                  <span :class="{hide: priceSort === ''}">↓</span>
                 </a>
               </li>
             </ol>
@@ -84,136 +62,30 @@
         </div>
         <div class="mt40">
           <!-- /no data notice start-->
-          <section class="no-data-wrap">
+          <section class="no-data-wrap" v-if="courseList.length === 0">
             <em class="icon30 no-data-ico">&nbsp;</em>
             <span class="c-666 fsize14 ml10 vam">No related course, we are fixing on this...</span>
           </section>
           <!-- /no data notice end-->
-          <article class="comm-course-list">
+          <article class="comm-course-list" v-else>
             <ul class="of" id="bna">
-              <li>
+              <li v-for="(course, id) in courseList" :key="id">
                 <div class="cc-l-wrap">
                   <section class="course-img">
-                    <img src="~/assets/photo/course/1442295592705.jpg" class="img-responsive" alt="听力口语">
+                    <img :src="course.cover" class="img-responsive" :alt="course.title">
                     <div class="cc-mask">
-                      <a href="/course/1" title="开始学习" class="comm-btn c-btn-1">开始学习</a>
+                      <a :href="'/course/' + course.id" title="start" class="comm-btn c-btn-1">start</a>
                     </div>
                   </section>
                   <h3 class="hLh30 txtOf mt10">
-                    <a href="/course/1" title="听力口语" class="course-title fsize18 c-333">听力口语</a>
+                    <a :href="'/course/' + course.id" :title="course.title" class="course-title fsize18 c-333">{{ course.title }}</a>
                   </h3>
                   <section class="mt10 hLh20 of">
-                    <span class="fr jgTag bg-green">
-                      <i class="c-fff fsize12 f-fA">免费</i>
+                    <span class="fr jgTag bg-green" v-if="Number(course.price) === 0">
+                      <i class="c-fff fsize12 f-fA">free</i>
                     </span>
-                    <span class="fl jgAttr c-ccc f-fA">
-                      <i class="c-999 f-fA">9634人学习</i>
-                      |
-                      <i class="c-999 f-fA">9634评论</i>
-                    </span>
-                  </section>
-                </div>
-              </li>
-              <li>
-                <div class="cc-l-wrap">
-                  <section class="course-img">
-                    <img src="~/assets/photo/course/1442295581911.jpg" class="img-responsive" alt="Java精品课程">
-                    <div class="cc-mask">
-                      <a href="/course/1" title="开始学习" class="comm-btn c-btn-1">开始学习</a>
-                    </div>
-                  </section>
-                  <h3 class="hLh30 txtOf mt10">
-                    <a href="/course/1" title="Java精品课程" class="course-title fsize18 c-333">Java精品课程</a>
-                  </h3>
-                  <section class="mt10 hLh20 of">
-                    <span class="fr jgTag bg-green">
-                      <i class="c-fff fsize12 f-fA">免费</i>
-                    </span>
-                    <span class="fl jgAttr c-ccc f-fA">
-                      <i class="c-999 f-fA">501人学习</i>
-                      |
-                      <i class="c-999 f-fA">501评论</i>
-                    </span>
-                  </section>
-                </div>
-              </li>
-              <li>
-                <div class="cc-l-wrap">
-                  <section class="course-img">
-                    <img src="~/assets/photo/course/1442295604295.jpg" class="img-responsive" alt="C4D零基础">
-                    <div class="cc-mask">
-                      <a href="/course/1" title="开始学习" class="comm-btn c-btn-1">开始学习</a>
-                    </div>
-                  </section>
-                  <h3 class="hLh30 txtOf mt10">
-                    <a href="/course/1" title="C4D零基础" class="course-title fsize18 c-333">C4D零基础</a>
-                  </h3>
-                  <section class="mt10 hLh20 of">
-                    <span class="fr jgTag bg-green">
-                      <i class="c-fff fsize12 f-fA">免费</i>
-                    </span>
-                    <span class="fl jgAttr c-ccc f-fA">
-                      <i class="c-999 f-fA">300人学习</i>
-                      |
-                      <i class="c-999 f-fA">300评论</i>
-                    </span>
-                  </section>
-                </div>
-              </li>
-              <li>
-                <div class="cc-l-wrap">
-                  <section class="course-img">
-                    <img
-                        src="~/assets/photo/course/1442302831779.jpg"
-                        class="img-responsive"
-                        alt="数学给宝宝带来的兴趣"
-                    >
-                    <div class="cc-mask">
-                      <a href="/course/1" title="开始学习" class="comm-btn c-btn-1">开始学习</a>
-                    </div>
-                  </section>
-                  <h3 class="hLh30 txtOf mt10">
-                    <a href="/course/1" title="数学给宝宝带来的兴趣" class="course-title fsize18 c-333">数学给宝宝带来的兴趣</a>
-                  </h3>
-                  <section class="mt10 hLh20 of">
-                    <span class="fr jgTag bg-green">
-                      <i class="c-fff fsize12 f-fA">免费</i>
-                    </span>
-                    <span class="fl jgAttr c-ccc f-fA">
-                      <i class="c-999 f-fA">256人学习</i>
-                      |
-                      <i class="c-999 f-fA">256评论</i>
-                    </span>
-                  </section>
-                </div>
-              </li>
-              <li>
-                <div class="cc-l-wrap">
-                  <section class="course-img">
-                    <img
-                        src="~/assets/photo/course/1442295455437.jpg"
-                        class="img-responsive"
-                        alt="零基础入门学习Python课程学习"
-                    >
-                    <div class="cc-mask">
-                      <a href="/course/1" title="开始学习" class="comm-btn c-btn-1">开始学习</a>
-                    </div>
-                  </section>
-                  <h3 class="hLh30 txtOf mt10">
-                    <a
-                        href="/course/1"
-                        title="零基础入门学习Python课程学习"
-                        class="course-title fsize18 c-333"
-                    >零基础入门学习Python课程学习</a>
-                  </h3>
-                  <section class="mt10 hLh20 of">
-                    <span class="fr jgTag bg-green">
-                      <i class="c-fff fsize12 f-fA">免费</i>
-                    </span>
-                    <span class="fl jgAttr c-ccc f-fA">
-                      <i class="c-999 f-fA">137人学习</i>
-                      |
-                      <i class="c-999 f-fA">137评论</i>
+                    <span class="fr jgTag bg-green" v-else>
+                      <i class="c-fff fsize12 f-fA">$ {{Number(course.price)}}</i>
                     </span>
                   </section>
                 </div>
@@ -225,13 +97,34 @@
         <!-- pagination start -->
         <div>
           <div class="paging">
-            <a class="undisable" title>start</a>
-            <a id="backpage" class="undisable" href="#" title>&lt;</a>
-            <a href="#" title class="current undisable">1</a>
-            <a href="#" title>2</a>
-            <a id="nextpage" href="#" title>&gt;</a>
-            <a href="#" title>end</a>
-            <div class="clear"></div>
+            <a
+                :class="{undisable: !pagination.hasPrevious}"
+                href="#"
+                title="start"
+                @click.prevent="gotoPage(1)">start</a>
+            <a
+                :class="{undisable: !pagination.hasPrevious}"
+                href="#"
+                title="previous"
+                @click.prevent="pagination.hasPrevious && gotoPage(pagination.currentPage - 1)">&lt;</a>
+            <a
+                v-for="page in pagination.totalPages"
+                :key="page"
+                :class="{current: pagination.currentPage === page, undisable: pagination.currentPage === page}"
+                :title="'Page No.'+page"
+                href="#"
+                @click.prevent="gotoPage(page)">{{ page }}</a>
+            <a
+                :class="{undisable: !pagination.hasNext}"
+                href="#"
+                title="next"
+                @click.prevent="pagination.hasNext && gotoPage(pagination.currentPage + 1)">&gt;</a>
+            <a
+                :class="{undisable: !pagination.hasNext}"
+                href="#"
+                title="end"
+                @click.prevent="gotoPage(pagination.totalPages)">end</a>
+            <div class="clear"/>
           </div>
         </div>
         <!-- pagination end -->
@@ -241,5 +134,108 @@
   </div>
 </template>
 <script>
-export default {};
+import courseApi from '@/api/course'
+export default {
+  data() {
+    return {
+      page: 1,
+      limit: 8,
+      subjectOneList: [],
+      subjectTwoList: [],
+      courseQuery: {},
+      courseList: [],
+      oneIndex: -1,
+      twoIndex: -1,
+      buyCountSort: "",
+      gmtCreateSort: "",
+      priceSort: "",
+      pagination: {
+        currentPage: 1,
+        totalRows: 0,
+        hasNext: false,
+        hasPrevious: false,
+        currentSize: 0,
+        totalPages: 0
+      }
+    }
+  },
+  created() {
+    this.getCourseList(1)
+    this.getAllSubject()
+  },
+  methods: {
+    getCourseList(page) {
+      courseApi.getCourseList(page, this.limit, this.courseQuery)
+        .then(response => {
+          this.courseList = response.data.data.courseList.items
+          this.pagination.currentPage = response.data.data.courseList.currentPage
+          this.pagination.totalRows = response.data.data.courseList.totalRows
+          this.pagination.hasNext = response.data.data.courseList.hasNext
+          this.pagination.hasPrevious = response.data.data.courseList.hasPrevious
+          this.pagination.totalPages = response.data.data.courseList.totalPages
+        })
+    },
+    getAllSubject() {
+      courseApi.getAllSubject()
+        .then(response => {
+          this.subjectOneList = response.data.data.subjectTree
+        })
+    },
+    gotoPage(page) {
+      this.getCourseList(page)
+    },
+    getSubjectTwoList(subjectOneId, index) {
+      this.oneIndex = index
+      this.twoIndex = -1
+      this.courseQuery.subjectId = ""
+      this.courseQuery.subjectParentId = subjectOneId
+      this.gotoPage(1)
+      this.subjectTwoList = this.subjectOneList[index].children
+    },
+    searchTwo(subjectTwoId, index) {
+      this.twoIndex = index
+      this.courseQuery.subjectId = subjectTwoId
+      this.gotoPage(1)
+    },
+    searchBuyCount() {
+      this.buyCountSort = "1";
+      this.gmtCreateSort = "";
+      this.priceSort = "";
+      this.courseQuery.buyCountSort = this.buyCountSort;
+      this.courseQuery.gmtCreateSort = this.gmtCreateSort;
+      this.courseQuery.priceSort = this.priceSort;
+      this.gotoPage(this.page)
+    },
+    searchGmtCreate() {
+      debugger
+      this.buyCountSort = "";
+      this.gmtCreateSort = "1";
+      this.priceSort = "";
+      this.courseQuery.buyCountSort = this.buyCountSort;
+      this.courseQuery.gmtCreateSort = this.gmtCreateSort;
+      this.courseQuery.priceSort = this.priceSort;
+      this.gotoPage(this.page)
+    },
+    searchPrice() {
+      this.buyCountSort = "";
+      this.gmtCreateSort = "";
+      this.priceSort = "1";
+      this.courseQuery.buyCountSort = this.buyCountSort;
+      this.courseQuery.gmtCreateSort = this.gmtCreateSort;
+      this.courseQuery.priceSort = this.priceSort;
+      this.gotoPage(this.page)
+    }
+  }
+};
 </script>
+<style scoped>
+.active {
+  background: #bdbdbd;
+}
+.hide {
+  display: none;
+}
+.show {
+  display: block;
+}
+</style>

@@ -135,6 +135,7 @@ import "~/assets/css/theme.css";
 import "~/assets/css/global.css";
 import "~/assets/css/web.css";
 import cookie from 'js-cookie'
+import loginApi from '@/api/login'
 export default {
   data(){
     return {
@@ -150,9 +151,24 @@ export default {
     }
   },
   created() {
+    // get the token from url if login with WeChat
+    this.token = this.$route.query.token
+    if (this.token) {
+      this.WeChatLogin()
+    }
     this.showInfo()
   },
   methods: {
+    WeChatLogin() {
+      // set token to cookie
+      cookie.set('mooc_token', this.token, {domain: 'localhost'})
+      // get user info from token and set it to cookie
+      loginApi.getLoginInfo()
+        .then(response => {
+          this.loginInfo = response.data.data.member
+          cookie.set('mooc_member', this.loginInfo, {domain: 'localhost'})
+        })
+    },
     showInfo() {
       let memberStr = cookie.get('mooc_member')
       if(memberStr) {

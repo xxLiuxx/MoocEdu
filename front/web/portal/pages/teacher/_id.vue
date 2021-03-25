@@ -39,23 +39,23 @@
             </section>
           </header>
           <!-- /no data begin-->
-          <section class="no-data-wrap">
+          <section class="no-data-wrap" v-if="courseList.length === 0">
             <em class="icon30 no-data-ico">&nbsp;</em>
             <span class="c-666 fsize14 ml10 vam">Now data now, we are working on this...</span>
           </section>
           <!-- /nodata end-->
-          <article class="comm-course-list">
+          <article class="comm-course-list" v-else>
             <ul class="of">
-              <li>
+              <li v-for="(course, id) in courseList" :key="id">
                 <div class="cc-l-wrap">
                   <section class="course-img">
-                    <img src="~/assets/photo/course/1442295455437.jpg" class="img-responsive" >
+                    <img :src="course.cover" class="img-responsive" >
                     <div class="cc-mask">
-                      <a href="#" title="开始学习" target="_blank" class="comm-btn c-btn-1">开始学习</a>
+                      <a href="#" title="start" target="_blank" class="comm-btn c-btn-1">start</a>
                     </div>
                   </section>
                   <h3 class="hLh30 txtOf mt10">
-                    <a href="#" title="零基础入门学习Python课程学习" target="_blank" class="course-title fsize18 c-333">零基础入门学习Python课程学习</a>
+                    <a href="#" :title="course.title" target="_blank" class="course-title fsize18 c-333">{{course.title}}</a>
                   </h3>
                 </div>
               </li>
@@ -69,12 +69,13 @@
   </div>
 </template>
 <script>
-import indexApi from '@/api/index'
+import teacherApi from '@/api/teacher'
 export default {
   data() {
     return {
       teacher: '',
-      id: ''
+      id: '',
+      courseList: []
     }
   },
   created() {
@@ -83,9 +84,10 @@ export default {
   },
   methods: {
     getTeacherById() {
-      indexApi.getTeacherById(this.id)
+      teacherApi.getFrontTeacher(this.id)
         .then(response => {
           this.teacher = response.data.data.teacher
+          this.courseList = response.data.data.courseList
         })
     }
   }
