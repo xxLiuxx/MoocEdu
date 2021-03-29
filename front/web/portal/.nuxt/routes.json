@@ -42,6 +42,13 @@
     "_name": "_43338bd6"
   },
   {
+    "name": "video-vid",
+    "path": "/video/:vid?",
+    "component": "/Users/liuyuchen/IdeaProjects/OnlineEdu/front/web/portal/pages/video/_vid.vue",
+    "chunkName": "pages/video/_vid",
+    "_name": "_5db9c3e4"
+  },
+  {
     "name": "index",
     "path": "/",
     "component": "/Users/liuyuchen/IdeaProjects/OnlineEdu/front/web/portal/pages/index.vue",

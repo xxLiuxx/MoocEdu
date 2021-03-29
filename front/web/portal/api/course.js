@@ -15,5 +15,11 @@ export default {
             url: `/eduservice/subject/findAll`,
             method: 'get'
         })
+    },
+    getCourseById(id) {
+        return request({
+            url: `${api_prefix}/getFrontCourse/${id}`,
+            method: 'get'
+        })
     }
 }
