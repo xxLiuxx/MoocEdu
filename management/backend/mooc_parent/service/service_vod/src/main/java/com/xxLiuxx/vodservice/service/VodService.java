@@ -29,4 +29,11 @@ public interface VodService {
      * @param videoIdList
      */
     void deleteBatch(List<String> videoIdList);
+
+    /**
+     * get video auth
+     * @param id
+     * @return
+     */
+    String getVodAuth(String id);
 }

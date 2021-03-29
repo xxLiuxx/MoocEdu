@@ -39,4 +39,10 @@ public class VodController {
         this.vodService.deleteBatch(videoIdList);
         return CommonResult.success();
     }
+
+    @GetMapping("getAuth/{id}")
+    public CommonResult getVodAuth(@PathVariable String id) {
+        String playAuth = this.vodService.getVodAuth(id);
+        return CommonResult.success().data("playAuth", playAuth);
+    }
 }

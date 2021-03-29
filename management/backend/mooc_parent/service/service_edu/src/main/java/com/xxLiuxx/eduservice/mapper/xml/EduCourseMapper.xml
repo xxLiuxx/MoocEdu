@@ -15,4 +15,19 @@
             LEFT JOIN edu_subject es2 on ec.subject_id = es2.id
         WHERE ec.id = #{courseId};
     </select>
+
+    <select id="getCourseBaseInfo" resultType="com.xxLiuxx.eduservice.entity.frontVo.CourseWebVo">
+        SELECT
+            ec.id, ec.title, ec.cover, ec.lesson_num As lessonNum, ec.price, ec.buy_count AS buyCount, ec.view_count AS viewCount,
+            et.`name` AS teacherName, et.id AS teacherId, et.intro, et.avatar,
+            ecd.description,
+            es1.title AS subjectLevelOne, es1.id AS subjectLevelOneId,
+            es2.title AS subjectLevelTwo, es2.id AS subjectLevelTwoId
+        FROM edu_course ec
+        LEFT JOIN edu_course_description ecd on ec.id = ecd.id
+        LEFT JOIN edu_teacher et on ec.teacher_id = et.id
+        LEFT JOIN edu_subject es1 on ec.subject_parent_id = es1.id
+        LEFT JOIN edu_subject es2 on ec.subject_id = es2.id
+        WHERE ec.id = #{courseId};
+    </select>
 </mapper>

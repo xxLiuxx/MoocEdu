@@ -7,6 +7,8 @@ import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.vod.model.v20170321.DeleteVideoRequest;
 import com.aliyuncs.vod.model.v20170321.DeleteVideoResponse;
+import com.aliyuncs.vod.model.v20170321.GetVideoPlayAuthRequest;
+import com.aliyuncs.vod.model.v20170321.GetVideoPlayAuthResponse;
 import com.xxLiuxx.servicebase.handler.MyException;
 import com.xxLiuxx.vodservice.config.VodConfig;
 import com.xxLiuxx.vodservice.service.VodService;
@@ -76,6 +78,22 @@ public class VodServiceImpl implements VodService {
             System.out.print("RequestId = " + response.getRequestId() + "\n");
         }catch (ClientException e){
             throw new MyException(500, "fail to delete video");
+        }
+    }
+
+    @Override
+    public String getVodAuth(String id) {
+        try {
+            DefaultAcsClient client = InitVodClient.initVodClient(VodConfig.ACCESS_KEY, VodConfig.ACCESS_SECRET);
+            GetVideoPlayAuthRequest request = new GetVideoPlayAuthRequest();
+
+            request.setVideoId(id);
+            GetVideoPlayAuthResponse response = client.getAcsResponse(request);
+
+            String playAuth = response.getPlayAuth();
+            return playAuth;
+        }catch (ClientException e) {
+            throw new MyException(500, "fail to get video auth");
         }
     }
 }

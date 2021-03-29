@@ -11,6 +11,7 @@ import com.xxLiuxx.eduservice.entity.bo.CourseFormBo;
 import com.xxLiuxx.eduservice.entity.bo.CourseQuery;
 import com.xxLiuxx.eduservice.entity.bo.PublishBo;
 import com.xxLiuxx.eduservice.entity.frontVo.CourseFrontVo;
+import com.xxLiuxx.eduservice.entity.frontVo.CourseWebVo;
 import com.xxLiuxx.eduservice.mapper.EduCourseMapper;
 import com.xxLiuxx.eduservice.service.EduChapterService;
 import com.xxLiuxx.eduservice.service.EduCourseDescriptionService;
@@ -230,6 +231,11 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         boolean hasPrevious = coursePage.hasPrevious();
 
         return new PageResult<>(current, total, records, hasNext, hasPrevious, size, pages);
+    }
+
+    @Override
+    public CourseWebVo getBaseCourseInfo(String id) {
+        return this.baseMapper.getCourseBaseInfo(id);
     }
 
 

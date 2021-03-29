@@ -8,6 +8,16 @@ public class VideoBo {
 
     private String title;
 
+    private String videoSourceId;
+
+    public String getVideoSourceId() {
+        return videoSourceId;
+    }
+
+    public void setVideoSourceId(String videoSourceId) {
+        this.videoSourceId = videoSourceId;
+    }
+
     public String getId() {
         return id;
     }

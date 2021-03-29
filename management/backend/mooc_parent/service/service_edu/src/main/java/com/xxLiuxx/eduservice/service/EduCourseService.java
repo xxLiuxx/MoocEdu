@@ -7,6 +7,7 @@ import com.xxLiuxx.eduservice.entity.bo.CourseFormBo;
 import com.xxLiuxx.eduservice.entity.bo.CourseQuery;
 import com.xxLiuxx.eduservice.entity.bo.PublishBo;
 import com.xxLiuxx.eduservice.entity.frontVo.CourseFrontVo;
+import com.xxLiuxx.eduservice.entity.frontVo.CourseWebVo;
 
 import java.util.List;
 
@@ -82,4 +83,11 @@ public interface EduCourseService extends IService<EduCourse> {
      * @return
      */
     PageResult<EduCourse> getFrontCourseList(CourseFrontVo courseQuery, long page, long limit);
+
+    /**
+     * get front course base info
+     * @param id
+     * @return
+     */
+    CourseWebVo getBaseCourseInfo(String id);
 }
