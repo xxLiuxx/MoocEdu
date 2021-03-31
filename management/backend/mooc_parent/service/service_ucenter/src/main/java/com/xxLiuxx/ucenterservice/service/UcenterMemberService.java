@@ -4,6 +4,9 @@ import com.xxLiuxx.ucenterservice.entity.UcenterMember;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.xxLiuxx.ucenterservice.entity.vo.RegisterVo;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
+
 /**
  * <p>
  * member service
@@ -33,4 +36,11 @@ public interface UcenterMemberService extends IService<UcenterMember> {
      * @return
      */
     UcenterMember getByOpenId(String openid);
+
+    /**
+     * get user info from token
+     * @param request
+     * @return
+     */
+    Map<String, Object> getUserInfo(HttpServletRequest request);
 }

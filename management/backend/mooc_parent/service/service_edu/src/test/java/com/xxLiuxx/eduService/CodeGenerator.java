@@ -54,7 +54,7 @@ public class CodeGenerator {
 
         // 5. strategy config
         StrategyConfig strategy = new StrategyConfig();
-        strategy.setInclude("edu_course", "edu_course_description", "edu_video", "edu_chapter");
+        strategy.setInclude("edu_comment");
         strategy.setNaming(NamingStrategy.underline_to_camel);//name strategy when mapping the database's name to entity
         strategy.setTablePrefix(pc.getModuleName() + "_");
 

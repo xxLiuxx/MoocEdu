@@ -14,6 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * <p>
  * member service implement
@@ -98,6 +102,22 @@ public class UcenterMemberServiceImpl extends ServiceImpl<UcenterMemberMapper, U
         wrapper.eq("openid", openid);
         UcenterMember member = this.baseMapper.selectOne(wrapper);
         return member;
+    }
+
+    @Override
+    public Map<String, Object> getUserInfo(HttpServletRequest request) {
+        Map<String, Object> map = new HashMap<>();
+
+        // get id from token and search member by id
+        String memberId = JwtUtils.getMemberIdByJwtToken(request);
+        UcenterMember member = this.baseMapper.selectById(memberId);
+
+        map.put("memberId", memberId);
+        map.put("avatar", member.getAvatar());
+        map.put("nickname", member.getNickname());
+
+        return map;
+
     }
 
 }

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 /**
  * <p>
@@ -43,6 +44,12 @@ public class UcenterMemberController {
         String memberId = JwtUtils.getMemberIdByJwtToken(request);
         UcenterMember member = this.memberService.getById(memberId);
         return CommonResult.success().data("member", member);
+    }
+
+    @GetMapping("getUserInfo")
+    public CommonResult getUserInfo(HttpServletRequest request) {
+        Map<String, Object> userInfo = this.memberService.getUserInfo(request);
+        return CommonResult.success().data("userInfo", userInfo);
     }
 }
 
