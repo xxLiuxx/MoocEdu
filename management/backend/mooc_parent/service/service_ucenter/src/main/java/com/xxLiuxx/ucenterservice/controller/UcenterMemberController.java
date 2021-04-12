@@ -6,6 +6,7 @@ import com.xxLiuxx.commonutils.utils.JwtUtils;
 import com.xxLiuxx.ucenterservice.entity.UcenterMember;
 import com.xxLiuxx.ucenterservice.entity.vo.RegisterVo;
 import com.xxLiuxx.ucenterservice.service.UcenterMemberService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -50,6 +51,14 @@ public class UcenterMemberController {
     public CommonResult getUserInfo(HttpServletRequest request) {
         Map<String, Object> userInfo = this.memberService.getUserInfo(request);
         return CommonResult.success().data("userInfo", userInfo);
+    }
+
+    @GetMapping("{memberId}")
+    public UcenterMemberOrder getUserInfoById(@PathVariable String memberId) {
+        UcenterMember member = this.memberService.getById(memberId);
+        UcenterMemberOrder ucenterMemberOrder = new UcenterMemberOrder();
+        BeanUtils.copyProperties(member, ucenterMemberOrder);
+        return ucenterMemberOrder;
     }
 }
 

@@ -86,5 +86,6 @@ public class EduCourseController {
         this.courseService.deleteCourse(courseId);
         return CommonResult.success();
     }
+
 }
 
