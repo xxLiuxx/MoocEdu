@@ -15,7 +15,7 @@ import java.util.UUID;
 
 /**
  * <p>
- * order 服务实现类
+ * order service implement
  * </p>
  *
  * @author Yuchen Liu
@@ -32,8 +32,9 @@ public class EduOrderServiceImpl extends ServiceImpl<EduOrderMapper, EduOrder> i
     @Override
     public String createOrder(String courseId, String memberId) {
         // get course info and member info with feign
-        CourseWebVoOrder course = eduClient.getCourseInfoForOrder(courseId);
-        UcenterMemberOrder member = ucenterClient.getUserInfoById(memberId);
+        CourseWebVoOrder course = this.eduClient.getCourseInfoForOrder(courseId);
+        System.out.println(course);
+        UcenterMemberOrder member = this.ucenterClient.getUserInfoById(memberId);
 
         EduOrder eduOrder = new EduOrder();
         // snowflake is a better solution
@@ -47,9 +48,10 @@ public class EduOrderServiceImpl extends ServiceImpl<EduOrderMapper, EduOrder> i
         eduOrder.setTeacherName(course.getTeacherName());
         eduOrder.setStatus(0);
         eduOrder.setPayType(1);
-
+        eduOrder.setTotalFee(course.getPrice());
         this.baseMapper.insert(eduOrder);
 
+        // return order number
         return eduOrder.getOrderNo();
     }
 }

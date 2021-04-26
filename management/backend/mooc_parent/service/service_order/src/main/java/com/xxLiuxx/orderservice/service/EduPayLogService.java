@@ -1,11 +1,14 @@
 package com.xxLiuxx.orderservice.service;
 
+import com.xxLiuxx.orderservice.entity.EduOrder;
 import com.xxLiuxx.orderservice.entity.EduPayLog;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.Map;
+
 /**
  * <p>
- * payment log 服务类
+ * payment log service
  * </p>
  *
  * @author Yuchen Liu
@@ -13,4 +16,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface EduPayLogService extends IService<EduPayLog> {
 
+    Map<String, Object> createCode(EduOrder order);
+
+    Map<String, String> checkStatus(String orderNo);
+
+    void updateOrderStatus(Map<String, String> result);
 }

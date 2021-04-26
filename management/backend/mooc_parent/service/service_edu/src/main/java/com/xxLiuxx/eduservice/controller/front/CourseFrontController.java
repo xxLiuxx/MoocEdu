@@ -50,7 +50,7 @@ public class CourseFrontController {
 
     @GetMapping("getCourseInfoForOrder/{courseId}")
     public CourseWebVoOrder getCourseInfoForOrder(@PathVariable String courseId) {
-        EduCourse course = this.courseService.getById(courseId);
+        CourseWebVo course = this.courseService.getBaseCourseInfo(courseId);
         CourseWebVoOrder courseWebVoOrder = new CourseWebVoOrder();
         BeanUtils.copyProperties(course, courseWebVoOrder);
         return courseWebVoOrder;

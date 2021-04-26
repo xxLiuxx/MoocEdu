@@ -2,6 +2,7 @@ package com.xxLiuxx.ucenterservice.controller;
 
 
 import com.xxLiuxx.commonutils.entity.CommonResult;
+import com.xxLiuxx.commonutils.orderVo.UcenterMemberOrder;
 import com.xxLiuxx.commonutils.utils.JwtUtils;
 import com.xxLiuxx.ucenterservice.entity.UcenterMember;
 import com.xxLiuxx.ucenterservice.entity.vo.RegisterVo;
