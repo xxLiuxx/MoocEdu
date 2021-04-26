@@ -35,6 +35,13 @@
     "_name": "_d8546124"
   },
   {
+    "name": "orders-id",
+    "path": "/orders/:id?",
+    "component": "/Users/liuyuchen/IdeaProjects/OnlineEdu/front/web/portal/pages/orders/_id.vue",
+    "chunkName": "pages/orders/_id",
+    "_name": "_0acfe838"
+  },
+  {
     "name": "teacher-id",
     "path": "/teacher/:id",
     "component": "/Users/liuyuchen/IdeaProjects/OnlineEdu/front/web/portal/pages/teacher/_id.vue",

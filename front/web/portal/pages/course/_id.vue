@@ -12,7 +12,7 @@
       <div>
         <article class="c-v-pic-wrap" style="height: 357px;">
           <section class="p-h-video-box" id="videoPlay">
-            <img :src="course.cover" :alt="course.title" class="dis c-v-pic">
+            <img height="100%" width="100%" :src="course.cover" :alt="course.title" class="dis c-v-pic">
           </section>
         </article>
         <aside class="c-attr-wrap">
@@ -34,11 +34,11 @@
             <section class="c-attr-mt of">
               <span class="ml10 vam">
                 <em class="icon18 scIcon"></em>
-                <a class="c-fff vam" title="collect" href="#" >Collect</a>
+                <a class="c-fff vam" title="collect" href="#">Collect</a>
               </span>
             </section>
             <section class="c-attr-mt">
-              <a href="#" title="watch" class="comm-btn c-btn-3">Start</a>
+              <a href="#" @click="createOrder" title="buy" class="comm-btn c-btn-3">Buy</a>
             </section>
           </section>
         </aside>
@@ -163,6 +163,9 @@
 </template>
 <script>
 import courseApi from '@/api/course'
+import orderApi from '@/api/order'
+import cookie from 'js-cookie'
+
 export default {
   data() {
     return {
@@ -178,10 +181,20 @@ export default {
   methods: {
     getCourse(id) {
       courseApi.getCourseById(id)
-        .then(response => {
-          this.course = response.data.data.course
-          this.chapterVideo = response.data.data.chapterVideo
-        })
+          .then(response => {
+            this.course = response.data.data.course
+            this.chapterVideo = response.data.data.chapterVideo
+          })
+    },
+    createOrder() {
+      if (!cookie.get('mooc_member')) {
+        this.$router.push({path: '../login'})
+      } else {
+        orderApi.createOrder(this.id)
+            .then(response => {
+              this.$router.push({path: '/orders/' + response.data.data.orderNumber})
+            })
+      }
     }
   }
 }
