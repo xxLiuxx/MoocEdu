@@ -14,5 +14,17 @@ export default {
             url: `${api_prefix}/getOrder/${orderNo}`,
             method: 'get'
         })
+    },
+    createCode(orderNo) {
+        return request({
+            url: `/orderservice/paylog/createCode/${orderNo}`,
+            method: 'get'
+        })
+    },
+    checkStatus(orderNo) {
+        return request({
+            url: `/orderservice/paylog/checkStatus/${orderNo}`,
+            method: 'get'
+        })
     }
 }

@@ -26,7 +26,7 @@
             </section>
             <section class="c-attr-jg" v-else>
               <span class="c-fff">Price：</span>
-              <b class="c-yellow" style="font-size:24px;">{{ Number(course.price) }}</b>
+              <b class="c-yellow" style="font-size:24px;">$ {{ Number(course.price) }}</b>
             </section>
             <section class="c-attr-mt c-attr-undis">
               <span class="c-fff fsize14">Instructor: {{ course.teacherName }}&nbsp;&nbsp;&nbsp;</span>

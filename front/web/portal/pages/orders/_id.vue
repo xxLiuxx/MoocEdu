@@ -39,8 +39,7 @@
         <tr>
           <td class="Billing tr" colspan="3">
             <div class="tr">
-              <p>Total: <strong class="red">1</strong> items<span
-                  class="red f20">$<strong>{{order.totalFee}}</strong></span></p>
+              <p>Total: <strong class="red">1</strong> items</p>
             </div>
           </td>
         </tr>
@@ -56,8 +55,7 @@
             <a :href="'/course/'+order.courseId">Go back to course page</a>
           </div>
           <div class="fr">
-            <p>Total: <strong class="red">1</strong> items<span class="red f20">$ <strong
-                id="AllPrice">{{order.totalFee}}</strong></span></p>
+            <p><span class="red f20">$ <strong id="AllPrice">{{order.totalFee}}</strong></span></p>
           </div>
         </div>
         <input name="score" value="0" type="hidden" id="usedScore">
@@ -86,6 +84,9 @@ export default {
         .then(response => {
           this.order = response.data.data.order
         })
+    },
+    toPay() {
+      this.$router.push({path: '/pay/' + this.orderNo})
     }
   }
 }
