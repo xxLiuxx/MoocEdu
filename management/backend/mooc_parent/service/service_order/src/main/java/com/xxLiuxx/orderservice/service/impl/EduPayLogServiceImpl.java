@@ -34,9 +34,11 @@ public class EduPayLogServiceImpl extends ServiceImpl<EduPayLogMapper, EduPayLog
     private EduOrderService orderService;
 
     @Override
-    public Map<String, Object> createCode(EduOrder order) {
+    public Map<String, Object> createCode(String orderNo) {
         try {
-            String orderNo = order.getOrderNo();
+            QueryWrapper<EduOrder> wrapper = new QueryWrapper<>();
+            wrapper.eq("order_no", orderNo);
+            EduOrder order = this.orderService.getOne(wrapper);
 
             // use map to set wechat pay params
             Map<String, String> requestInfo = new HashMap<>();

@@ -27,10 +27,10 @@ public class EduPayLogController {
     @Autowired
     private EduPayLogService payLogService;
 
-    @GetMapping("createCode")
+    @GetMapping("createCode/{orderNo}")
     @ApiOperation(value = "create WeChat Pay QR Code")
-    public CommonResult createCode(@RequestBody EduOrder order) {
-        Map<String, Object> payInfo = this.payLogService.createCode(order);
+    public CommonResult createCode(@PathVariable("orderNo") String orderNo) {
+        Map<String, Object> payInfo = this.payLogService.createCode(orderNo);
 
         return CommonResult.success().data("payInfo", payInfo);
     }

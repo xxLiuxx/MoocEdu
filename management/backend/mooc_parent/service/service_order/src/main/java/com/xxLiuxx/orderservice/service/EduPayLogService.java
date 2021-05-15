@@ -16,7 +16,7 @@ import java.util.Map;
  */
 public interface EduPayLogService extends IService<EduPayLog> {
 
-    Map<String, Object> createCode(EduOrder order);
+    Map<String, Object> createCode(String orderNo);
 
     Map<String, String> checkStatus(String orderNo);
 
