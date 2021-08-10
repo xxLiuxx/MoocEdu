@@ -3,60 +3,70 @@
     "name": "course",
     "path": "/course",
     "component": "/Users/liuyuchen/IdeaProjects/OnlineEdu/front/web/portal/pages/course/index.vue",
-    "chunkName": "pages/course/index"
+    "chunkName": "pages/course/index",
+    "_name": "_2588a386"
   },
   {
     "name": "login",
     "path": "/login",
     "component": "/Users/liuyuchen/IdeaProjects/OnlineEdu/front/web/portal/pages/login.vue",
-    "chunkName": "pages/login"
+    "chunkName": "pages/login",
+    "_name": "_11b5f571"
   },
   {
     "name": "register",
     "path": "/register",
     "component": "/Users/liuyuchen/IdeaProjects/OnlineEdu/front/web/portal/pages/register.vue",
-    "chunkName": "pages/register"
+    "chunkName": "pages/register",
+    "_name": "_77e33c6a"
   },
   {
     "name": "teacher",
     "path": "/teacher",
     "component": "/Users/liuyuchen/IdeaProjects/OnlineEdu/front/web/portal/pages/teacher/index.vue",
-    "chunkName": "pages/teacher/index"
+    "chunkName": "pages/teacher/index",
+    "_name": "_0da9006d"
   },
   {
     "name": "course-id",
     "path": "/course/:id",
     "component": "/Users/liuyuchen/IdeaProjects/OnlineEdu/front/web/portal/pages/course/_id.vue",
-    "chunkName": "pages/course/_id"
+    "chunkName": "pages/course/_id",
+    "_name": "_d8546124"
   },
   {
     "name": "orders-id",
     "path": "/orders/:id?",
     "component": "/Users/liuyuchen/IdeaProjects/OnlineEdu/front/web/portal/pages/orders/_id.vue",
-    "chunkName": "pages/orders/_id"
+    "chunkName": "pages/orders/_id",
+    "_name": "_0acfe838"
   },
   {
     "name": "pay-id",
     "path": "/pay/:id?",
     "component": "/Users/liuyuchen/IdeaProjects/OnlineEdu/front/web/portal/pages/pay/_id.vue",
-    "chunkName": "pages/pay/_id"
+    "chunkName": "pages/pay/_id",
+    "_name": "_bd091e4a"
   },
   {
     "name": "teacher-id",
     "path": "/teacher/:id",
     "component": "/Users/liuyuchen/IdeaProjects/OnlineEdu/front/web/portal/pages/teacher/_id.vue",
-    "chunkName": "pages/teacher/_id"
+    "chunkName": "pages/teacher/_id",
+    "_name": "_43338bd6"
   },
   {
     "name": "video-vid",
     "path": "/video/:vid?",
     "component": "/Users/liuyuchen/IdeaProjects/OnlineEdu/front/web/portal/pages/video/_vid.vue",
-    "chunkName": "pages/video/_vid"
+    "chunkName": "pages/video/_vid",
+    "_name": "_5db9c3e4"
   },
   {
     "name": "index",
     "path": "/",
     "component": "/Users/liuyuchen/IdeaProjects/OnlineEdu/front/web/portal/pages/index.vue",
-    "chunkName": "pages/index"
+    "chunkName": "pages/index",
+    "_name": "_480e525a"
   }
 ]

@@ -20,7 +20,7 @@
             <h2 class="hLh30 txtOf mt15">
               <span class="c-fff fsize24">{{ course.title }}</span>
             </h2>
-            <section class="c-attr-jg" v-if="Number(course.price) === 0">
+            <section class="c-attr-jg" v-if="isBought || Number(course.price) === 0">
               <span class="c-fff">Price：</span>
               <b class="c-yellow" style="font-size:24px;">Free</b>
             </section>
@@ -37,7 +37,10 @@
                 <a class="c-fff vam" title="collect" href="#">Collect</a>
               </span>
             </section>
-            <section class="c-attr-mt">
+            <section v-if="Number(course.price === 0)" class="c-attr-mt">
+              <a href="#" @click="createOrder" title="Start" class="comm-btn c-btn-3">Start</a>
+            </section>
+            <section v-else class="c-attr-mt">
               <a href="#" @click="createOrder" title="buy" class="comm-btn c-btn-3">Buy</a>
             </section>
           </section>
@@ -171,12 +174,14 @@ export default {
     return {
       course: {},
       chapterVideo: [],
+      isBought: false,
       id: ""
     }
   },
   created() {
     this.id = this.$route.params.id
     this.getCourse(this.id)
+    console.log(this.isBought)
   },
   methods: {
     getCourse(id) {
@@ -184,6 +189,7 @@ export default {
           .then(response => {
             this.course = response.data.data.course
             this.chapterVideo = response.data.data.chapterVideo
+            this.isBought = response.data.data.isBought
           })
     },
     createOrder() {
