@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 /**
  * <p>
@@ -40,6 +41,12 @@ public class EduOrderController {
         EduOrder order = this.orderService.getOne(wrapper);
 
         return CommonResult.success().data("order", order);
+    }
+
+    @GetMapping("checkCourseStatus/{courseId}/{memberId}")
+    public Boolean checkCourseStatus(@PathVariable String courseId, @PathVariable String memberId) {
+
+        return this.orderService.checkCourseStatus(courseId, memberId);
     }
 }
 

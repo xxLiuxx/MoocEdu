@@ -4,6 +4,7 @@ import com.xxLiuxx.orderservice.entity.EduOrder;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import javax.servlet.http.HttpServletRequest;
+import org.springframework.web.bind.annotation.PathVariable;
 
 /**
  * <p>
@@ -16,4 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 public interface EduOrderService extends IService<EduOrder> {
 
     String createOrder(String courseId, String memberId);
+
+    Boolean checkCourseStatus(String courseId, String memberId);
 }

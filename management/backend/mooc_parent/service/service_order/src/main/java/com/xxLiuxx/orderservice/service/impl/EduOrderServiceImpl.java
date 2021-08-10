@@ -1,5 +1,6 @@
 package com.xxLiuxx.orderservice.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.xxLiuxx.commonutils.orderVo.CourseWebVoOrder;
 import com.xxLiuxx.commonutils.orderVo.UcenterMemberOrder;
 import com.xxLiuxx.orderservice.client.EduClient;
@@ -53,5 +54,15 @@ public class EduOrderServiceImpl extends ServiceImpl<EduOrderMapper, EduOrder> i
 
         // return order number
         return eduOrder.getOrderNo();
+    }
+
+    @Override
+    public Boolean checkCourseStatus(String courseId, String memberId) {
+        QueryWrapper<EduOrder> wrapper = new QueryWrapper<>();
+        wrapper.eq("course_id", courseId);
+        wrapper.eq("member_id", memberId);
+        wrapper.eq("status", 1);
+
+        return this.count() > 0;
     }
 }
