@@ -1,5 +1,5 @@
 server:
-  port: 8150
+  port: 8008
 
 #Mybatis
 mybatis-plus:
@@ -9,10 +9,12 @@ mybatis-plus:
     db-config:
       logic-delete-value: 1
       logic-not-delete-value: 0
-  mapper-locations: classpath:com/xxLiuxx/ucenterservice/mapper/xml/*.xml
+  mapper-locations: classpath:com/xxLiuxx/statservice/mapper/xml/*.xml
 
 #database
 spring:
+  application:
+    name: service-statistics
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/online_edu?userSSL=false&&serverTimezone=GMT%2B8
@@ -33,11 +35,22 @@ spring:
         max-idle: 5
         min-idle: 0
 
-wx:
-  open:
-    appId: wxed9954c01bb89b47
-    appSecret: a7482517235173ddb4083788de60b90e
-    redirectUrl: http://guli.shop/api/ucenter/wx/callback
 
 #nacos
 spring.cloud.nacos.discovery.server-addr: 127.0.0.1:8848
+
+#hystrix
+feign:
+  hystrix:
+    enabled: true
+
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 40000
+

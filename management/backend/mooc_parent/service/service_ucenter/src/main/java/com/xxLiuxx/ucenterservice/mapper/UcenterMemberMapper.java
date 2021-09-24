@@ -5,12 +5,14 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
  * <p>
- * 会员表 Mapper 接口
+ * Member Mapper interface
  * </p>
  *
  * @author Yuchen Liu
  * @since 2021-03-09
  */
 public interface UcenterMemberMapper extends BaseMapper<UcenterMember> {
+
+    Integer countDailyRegister(String date);
 
 }

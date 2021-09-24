@@ -43,4 +43,11 @@ public interface UcenterMemberService extends IService<UcenterMember> {
      * @return
      */
     Map<String, Object> getUserInfo(HttpServletRequest request);
+
+  /**
+   * Count daily register number
+   * @param date date
+   * @return
+   */
+    Integer countDailyRegister(String date);
 }
