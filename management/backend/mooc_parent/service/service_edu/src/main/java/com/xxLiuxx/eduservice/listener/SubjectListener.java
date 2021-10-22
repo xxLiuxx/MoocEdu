@@ -17,7 +17,7 @@ public class SubjectListener extends AnalysisEventListener<EduSubjectData> {
     // the AnalysisEventListener object is not managed by spring
     // so we can not use beans managed by spring such as subjectService in this class
     // since the mapper is managed by the spring as well, we are not able to operate the database either
-    // so we need to pass the object from the class we need to this calss
+    // so we need to pass the object from the class we need to this class
 
     public EduSubjectService subjectService;
 

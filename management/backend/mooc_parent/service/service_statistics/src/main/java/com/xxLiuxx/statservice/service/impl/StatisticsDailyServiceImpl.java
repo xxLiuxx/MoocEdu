@@ -1,5 +1,6 @@
 package com.xxLiuxx.statservice.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.xxLiuxx.commonutils.entity.CommonResult;
 import com.xxLiuxx.statservice.client.UcenterClient;
 import com.xxLiuxx.statservice.entity.StatisticsDaily;
@@ -29,6 +30,11 @@ public class StatisticsDailyServiceImpl extends ServiceImpl<StatisticsDailyMappe
     CommonResult result = this.ucenterClient.countDailyRegister(date);
     // decode the data from the result
     Integer dailyRegister = (Integer) result.getData().get("dailyRegister");
+
+    // delete the old data
+    QueryWrapper<StatisticsDaily> wrapper = new QueryWrapper<>();
+    wrapper.eq("data_calculated", date);
+    this.baseMapper.delete(wrapper);
 
     // insert data into database
     StatisticsDaily statisticsDaily = new StatisticsDaily();
