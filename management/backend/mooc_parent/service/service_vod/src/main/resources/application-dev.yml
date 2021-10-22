@@ -5,10 +5,10 @@ server:
 spring:
   cloud:
     alicloud:
-      access-key: LTAI4GDR68tGrgGWiuzKgF8L
-      secret-key: a4ILbgMnH6LvQHKpCUQkmBcn4SaNRo
-#      access-key: xxxx
-#      secret-key: xxxx
+#      access-key: LTAI4GDR68tGrgGWiuzKgF8L
+#      secret-key: a4ILbgMnH6LvQHKpCUQkmBcn4SaNRo
+      access-key: xxxx
+      secret-key: xxxx
   servlet:
     multipart:
       max-file-size: 100MB
